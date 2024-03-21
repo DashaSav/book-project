@@ -1,14 +1,36 @@
 @import "custom";
+*{
+    font-family: "Roboto Slab", sans-serif;
 
-body{
-    margin: 0;
-    padding: 0;
+}
+.buttons{
+    margin-bottom: 10px;
+}
+.body img{
+    margin: 0 auto;
+    width: 115px;
+    height: 115px;
+    align-items: center;
+}
+.body{
+    width: 45%;
+    margin: 2% 25%;
+    padding: 4px;
+}
+
+.body .btn{
+    display: inline-block;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 16px;
 }
 p{
-    text-decoration-color: #6C757D;
+    color: #6C757D;
     line-height: 150%;
     size: 16em;
-    font-family: "Roboto Slab", sans-serif;
+}
+.body .header{
+    text-align: center;
 }
 
 button{

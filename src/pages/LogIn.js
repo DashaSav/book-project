@@ -1,18 +1,23 @@
-import { Button } from 'react-bootstrap';
+import { Button, Stack } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import './App.scss';
+import '../App.scss';
+import logo from '../images/logo owl book.png';
+
 
 function App() {
   return (
     <>
-      <body>
-        <img />
-        <h1>Create an account</h1>
-        <p>Start your journey!</p>
+      <Stack className='body'>
+        <img src={logo} className="App-logo" alt="logo"/>
+        <div className='header'>
+          <h1>Create an account</h1>
+          <p>Start your journey!</p>
+        </div>
 
         {/*Ввод имени*/}
+        <Form>
         <Form.Label htmlFor="inputName">Name</Form.Label>
-        <Form.Control type="email" placeholder="Enter your name" />
+        <Form.Control type="emailт  " placeholder="Enter your name" />
 
         {/*EMAIL*/}
         <Form.Label htmlFor="inputEmail">Email</Form.Label>
@@ -30,14 +35,16 @@ function App() {
           Your password must be 8-20 characters long, contain letters and numbers,
           and must not contain spaces, special characters, or emoji.
         </Form.Text>
+        </Form>
         <br />
 
-        <Button as="input" type="button" value="Get started" />{' '}
-        <br />
-        <Button as="input" type="button" value="Sign up with Google" />{' '}
-        <br />
-        <p>Already have an account? <a href=''>Log in</a></p>
-      </body>
+        <div className='btn'>
+          <Button as="input" type="button" value="Get started" />{' '}
+          <Button as="input" type="button" value="Sign up with Google" />{' '}
+        </div>
+
+        <p className='footer'>Already have an account? <a href="../SignUp.js">Log in</a></p>
+      </Stack>
     </>
   );
 }
