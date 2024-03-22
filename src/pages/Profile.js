@@ -15,7 +15,7 @@ function SignUp() {
                 {/*Ввод имени*/}
                 <Form>
                     <Form.Label htmlFor="inputName">Name</Form.Label>
-                    <Form.Control type="emailт  " placeholder="Enter your name" />
+                    <Form.Control type="email" placeholder="Enter your name" />
 
                     {/*EMAIL*/}
                     <Form.Label htmlFor="inputEmail">Email</Form.Label>

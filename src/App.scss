@@ -1,35 +1,38 @@
 @import "custom";
 *{
     font-family: "Roboto Slab", sans-serif;
-
 }
+
 .buttons{
     margin-bottom: 10px;
 }
-.body img{
+
+.my-cont img{
     margin: 0 auto;
     width: 115px;
     height: 115px;
     align-items: center;
 }
-.body{
-    width: 45%;
-    margin: 2% 25%;
+
+.my-cont{
+        width: 30%;
+        margin: 2% auto;
     padding: 4px;
 }
 
-.body .btn{
+.my-cont .button-block{
     display: inline-block;
     width: 100%;
     align-items: center;
     margin-bottom: 16px;
 }
+
 p{
     color: #6C757D;
     line-height: 150%;
     size: 16em;
 }
-.body .header{
+.my-cont .header{
     text-align: center;
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
-import LogIn from './pages/LogIn';
+import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import MainPage from './pages/MainPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
 },
 {
   path: '/login',
-  element: <LogIn />,
+  element: <Login />,
 },
 {
   path: '/signup',
