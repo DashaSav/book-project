@@ -13,6 +13,8 @@ function SignUp() {
   const changePassword = (e) => setPassword(e.target.value);
   const changeName = (e) => setName(e.target.value);
 
+  // TODO: add axios post request
+
   return (
     <>
       <Stack className='my-cont'>

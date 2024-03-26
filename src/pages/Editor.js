@@ -1,28 +1,13 @@
-import { Button, InputGroup, FloatingLabel } from 'react-bootstrap';
+import { Button, FloatingLabel } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import '../App.scss';
 import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
+import BooksNavbar from '../components/BooksNavbar';
 
 export default function Editor() {
     return (
         <>
-            <Navbar expand="lg" className="nav-books">
-                <Container>
-                    <Navbar.Brand href="#home">Books</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
-                    <InputGroup className="mb-2 me-3">
-                        <Form.Control
-                            placeholder="Найти книгу или автора"
-                            aria-describedby="search books or authors"
-                        />
-                        <Button className='mb-2' as="input" type="submit" variant="outline-primary" value="Найти" />
-                    </InputGroup>
-
-                    <Button className='mb-2' as="input" type="submit" value="Войти" />
-                </Container>
-            </Navbar>
+            <BooksNavbar />
             <Container className='content'>
                 <h2>Добавить новую часть</h2>
                 <Container className='chapterName'>

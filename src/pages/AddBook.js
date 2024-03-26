@@ -1,13 +1,12 @@
-import { Button, InputGroup } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
+import { Button, InputGroup, FloatingLabel, Form } from 'react-bootstrap';
 import '../App.scss';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
-export default function AddBook(){
-    return(
+export default function AddBook() {
+    return (
         <>
-        <Navbar expand="lg" className="nav-books">
+            <Navbar expand="lg" className="nav-books">
                 <Container>
                     <Navbar.Brand href="#home">Books</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -23,21 +22,19 @@ export default function AddBook(){
                     <Button className='mb-2' as="input" type="submit" value="Войти" />
                 </Container>
             </Navbar>
+
             <Container className='content'>
                 <h2>Добавить новую книгу</h2>
                 <Container className='inputText'>
                     <h3>Текстовый редактор</h3>
-                        <FloatingLabel
-                            controlId="chapterText"
-                            label="Chapter"
-                            className="mb-3">
-                            <Form.Control as="textarea" placeholder="Введите название книги" />
-                        </FloatingLabel>
-
+                    <FloatingLabel
+                        controlId="chapterText"
+                        label="Chapter"
+                        className="mb-3">
+                        <Form.Control as="textarea" placeholder="Введите название книги" />
+                    </FloatingLabel>
                 </Container>
-
             </Container>
-            </>
-            
+        </>
     );
 }

@@ -1,30 +1,15 @@
-
-import { Button, InputGroup, FloatingLabel } from 'react-bootstrap';
+import { Button, FloatingLabel } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import '../App.scss';
 import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
 import logo from '../images/logo owl book.png';
-export default function BookPage() {
+import BooksNavbar from '../components/BooksNavbar';
 
+export default function BookPage() {
     return (
         <>
-            <Navbar expand="lg" className="nav-books">
-                <Container>
-                    <Navbar.Brand href="#home">Books</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <BooksNavbar />
 
-                    <InputGroup className="mb-2 me-3">
-                        <Form.Control
-                            placeholder="Найти книгу или автора"
-                            aria-describedby="search books or authors"
-                        />
-                        <Button className='mb-2' as="input" type="submit" variant="outline-primary" value="Найти" />
-                    </InputGroup>
-
-                    <Button className='mb-2' as="input" type="submit" value="Войти" />
-                </Container>
-            </Navbar>
             <h1>Название книги</h1>
             <Container className='imgRating'>
                 <img src={logo} className="App-logo" alt="logo" />
