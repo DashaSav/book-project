@@ -1,27 +1,15 @@
-import { Button, InputGroup, FloatingLabel, Form } from 'react-bootstrap';
+import { FloatingLabel, Form } from 'react-bootstrap';
+import BooksNavbar from '../components/BooksNavbar';
 import '../App.scss';
 import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
+import { useState } from 'react';
 
 export default function AddBook() {
+    const ageOptions = ["6+", "12+", "16+", "18+"];
+    
     return (
         <>
-            <Navbar expand="lg" className="nav-books">
-                <Container>
-                    <Navbar.Brand href="#home">Books</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
-                    <InputGroup className="mb-2 me-3">
-                        <Form.Control
-                            placeholder="Найти книгу или автора"
-                            aria-describedby="search books or authors"
-                        />
-                        <Button className='mb-2' as="input" type="submit" variant="outline-primary" value="Найти" />
-                    </InputGroup>
-
-                    <Button className='mb-2' as="input" type="submit" value="Войти" />
-                </Container>
-            </Navbar>
+           <BooksNavbar />
 
             <Container className='content'>
                 <h2>Добавить новую книгу</h2>
@@ -34,6 +22,15 @@ export default function AddBook() {
                         <Form.Control as="textarea" placeholder="Введите название книги" />
                     </FloatingLabel>
                 </Container>
+
+
+                <Form>
+                    {ageOptions.map((option) =>
+                        <div key={option} className="mb-2">
+                            <Form.Check type="radio" label={option} name="radioGroup" />
+                        </div>
+                    )}
+                </Form>
             </Container>
         </>
     );
