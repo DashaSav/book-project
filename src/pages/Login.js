@@ -11,8 +11,20 @@ function Login() {
 
     const changeEmail = (e) => setEmail(e.target.value);
     const changePassword = (e) => setPassword(e.target.value);
-
+    
     // TODO: add axios post request
+    const handleSubmit = async () =>{
+    const user = {
+        email: email,
+        password: password
+    };
+    try {
+        const result = await axios.post("http://localhost:8080/auth/login", user);
+        console.log(result);
+      } catch (e) {
+        console.log(e);
+      }
+}
 
     return (
         <>
@@ -23,7 +35,7 @@ function Login() {
                     <p>Welcome back! Please enter your details.</p>
                 </div>
 
-                <Form method='POST'>
+                <Form onSubmit={handleSubmit}>
                     {/*EMAIL*/}
                     <Form.Group controlId="formEmail">
                         <Form.Label>Email</Form.Label>

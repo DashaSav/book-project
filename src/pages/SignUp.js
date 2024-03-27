@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import '../App.scss';
 import logo from '../images/logo owl book.png';
 import { useState } from 'react';
+import axios from 'axios';
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -13,7 +14,20 @@ function SignUp() {
   const changePassword = (e) => setPassword(e.target.value);
   const changeName = (e) => setName(e.target.value);
 
-  // TODO: add axios post request
+  const handleSubmit = async () => {
+    const user = {
+      name: name,
+      email: email,
+      password: password
+    };
+
+    try {
+      const result = await axios.post("http://localhost:8080/auth/register", user);
+      console.log(result);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
     <>
@@ -25,7 +39,7 @@ function SignUp() {
         </div>
 
         {/*Ввод имени*/}
-        <Form method='POST'>
+        <Form onSubmit={handleSubmit}>
           <FormGroup controlId="formName">
             <Form.Label>Name</Form.Label>
             <Form.Control value={name} onChange={changeName} type="text" placeholder="Enter your name" />
