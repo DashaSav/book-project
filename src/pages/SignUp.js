@@ -1,9 +1,9 @@
-import { Button, FormGroup, Stack } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
-import '../App.scss';
-import logo from '../images/logo owl book.png';
-import { useState } from 'react';
-import axios from 'axios';
+import { Button, FormGroup, Stack } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import "../styles/App.scss";
+import logo from "../images/logo owl book.png";
+import { useState } from "react";
+import axios from "axios";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -18,64 +18,88 @@ function SignUp() {
     const user = {
       name: name,
       email: email,
-      password: password
+      password: password,
     };
 
     try {
-      const result = await axios.post("http://localhost:8080/auth/register", user);
+      const result = await axios.post(
+        "http://localhost:8080/auth/register",
+        user,
+      );
+
       console.log(result);
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   return (
     <>
-      <Stack className='my-cont'>
-        <img src={logo} className="App-logo" alt="logo"/>
-        <div className='header'>
-          <h1>Create an account</h1>
-          <p>Start your journey!</p>
+      <Stack className="my-cont">
+        <img src={logo} className="App-logo" alt="logo" />
+        <div className="header">
+          <h2>Создайте аккаунт</h2>
+          <p>Начните ваше погружение!</p>
         </div>
 
         {/*Ввод имени*/}
         <Form onSubmit={handleSubmit}>
-          <FormGroup controlId="formName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control value={name} onChange={changeName} type="text" placeholder="Enter your name" />
+          <FormGroup className="mb-2" controlId="formName">
+            <Form.Label>Имя</Form.Label>
+            <Form.Control
+              value={name}
+              onChange={changeName}
+              type="text"
+              placeholder="Введите имя"
+            />
           </FormGroup>
 
           {/*EMAIL*/}
-          <FormGroup controlId="formEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control value={email} onChange={changeEmail} type="email" placeholder="Enter your email" />
+          <FormGroup className="mb-2" controlId="formEmail">
+            <Form.Label>Почта</Form.Label>
+            <Form.Control
+              value={email}
+              onChange={changeEmail}
+              type="email"
+              placeholder="Введите почту"
+            />
           </FormGroup>
 
           {/*Пароль*/}
-          <FormGroup controlId="formPassword">
-            <Form.Label>Password</Form.Label>
+          <FormGroup className="mb-4" controlId="formPassword">
+            <Form.Label>Пароль</Form.Label>
             <Form.Control
               id="inputPassword"
               value={password}
               onChange={changePassword}
               type="password"
               aria-describedby="passwordHelpBlock"
-              placeholder="Password"
+              placeholder="Введите пароль"
             />
             <Form.Text id="passwordHelpBlock" muted>
-              Your password must be 8-20 characters long, contain letters and numbers,
-              and must not contain spaces, special characters, or emoji.
+              Ваш пароль должен состоять из 8-20 символов, содержать буквы и
+              цифры, и не должен содержать пробелов или эмодзи.
             </Form.Text>
           </FormGroup>
-          <br />
 
-          <Stack className='mt-2'>
-            <Button className='mb-2' as="input" type="submit" value="Get started" />
-            <Button as="input" type="submit" value="Sign up with Google" />
+          <Stack className="mt-2">
+            <Button
+              className="mb-2"
+              as="input"
+              type="submit"
+              value="Зарегистрироваться"
+            />
+            <Button
+              as="input"
+              type="submit"
+              value="Зарегистрироваться через Google"
+            />
           </Stack>
         </Form>
-        
-        <p className='footer'>Already have an account? <a href="/login">Log in</a></p>
+
+        <p className="footer">
+          Уже есть аккаунт? <a href="/login">Войти</a>
+        </p>
       </Stack>
     </>
   );

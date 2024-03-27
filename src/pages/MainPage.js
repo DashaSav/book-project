@@ -1,15 +1,18 @@
-import '../App.scss';
-import Book from '../components/Book';
-import BooksNavbar from '../components/BooksNavbar';
+import "../styles/App.scss";
+import Book from "../components/Book";
+import BooksNavbar from "../components/BooksNavbar";
+import { Container } from "react-bootstrap";
 
 function MainPage() {
-    return (
-        <>
-            <BooksNavbar />
-            <h1>Популярные</h1>
-            <Book />
-        </>
-    );
+  return (
+    <>
+      <BooksNavbar />
+      <Container>
+        <h4 className="mb-2 mt-2">Популярные</h4>
+        <Book />
+      </Container>
+    </>
+  );
 }
 
 export default MainPage;
