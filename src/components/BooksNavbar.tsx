@@ -6,7 +6,7 @@ export default function BooksNavbar() {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
 
-  const changeSearch = (e) => setSearchText(e.target.value);
+  const changeSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchText(e.currentTarget.value);
   const handleSignInClick = () => navigate("/login");
 
   return (

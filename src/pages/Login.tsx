@@ -9,9 +9,9 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const changeEmail = (e) => setEmail(e.target.value);
+  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.currentTarget.value);
 
-  const changePassword = (e) => setPassword(e.target.value);
+  const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
 
   const handleSubmit = async () => {
     const user = {
