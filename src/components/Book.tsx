@@ -2,7 +2,8 @@ import { Card, Button } from "react-bootstrap";
 import logo from "../images/logo owl book.png";
 import { useNavigate } from "react-router-dom";
 
-export default function Book() {
+type BookProps = { book: IBook; }
+export default function Book({ book } : BookProps) {
   const navigate = useNavigate();
   const handleReadClick = () => navigate("/bookpage");
 
@@ -11,11 +12,9 @@ export default function Book() {
       <Card style={{ width: "18rem" }}>
         <Card.Img variant="top" src={logo} />
         <Card.Body>
-          <Card.Title>Название книги</Card.Title>
-          <Card.Text>Автор книги</Card.Text>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+          <Card.Title>{book.title}</Card.Title>
+          <Card.Text>{book.author}</Card.Text>
+          <Card.Text>{book.description}
           </Card.Text>
           <Button variant="primary" onClick={handleReadClick}>
             Читать
