@@ -1,12 +1,12 @@
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
-import MainPage from "./pages/MainPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import BookPage from "./pages/BookPage";
-import AddBook from "./pages/AddBook";
-import Editor from "./pages/Editor";
-import Profile from "./pages/Profile";
 import { createBrowserRouter } from "react-router-dom";
+import AddBook from "../presentation/pages/AddBook";
+import BookPage from "../presentation/pages/BookPage";
+import Editor from "../presentation/pages/Editor";
+import Login from "../presentation/pages/Login";
+import MainPage from "../presentation/pages/MainPage";
+import NotFoundPage from "../presentation/pages/NotFoundPage";
+import Profile from "../presentation/pages/Profile";
+import SignUp from "../presentation/pages/SignUp";
 
 const router = createBrowserRouter([
   {

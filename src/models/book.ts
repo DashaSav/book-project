@@ -1,6 +1,5 @@
-
-interface IBook{
-    author: string;
-    title: string;
-    description: string;
+interface IBook {
+  author: string;
+  title: string;
+  description: string;
 }

@@ -1,26 +1,23 @@
 import { Button, Stack } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import "../styles/App.scss";
-import logo from "../images/logo owl book.png";
+import logo from "../../assets/logo owl book.png";
 import { useState } from "react";
-import axios from "axios";
+import { login } from "../../data/apiService";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.currentTarget.value);
+  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setEmail(e.currentTarget.value);
 
-  const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
+  const changePassword = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setPassword(e.currentTarget.value);
 
   const handleSubmit = async () => {
-    const user = {
-      email: email,
-      password: password,
-    };
-
     try {
-      const result = await axios.post("http://localhost:8080/auth/login", user);
+      const result = await login(email, password);
       console.log(result);
     } catch (e) {
       console.log(e);
@@ -71,11 +68,11 @@ function Login() {
           </a>
 
           <Stack className="mt-3">
-            <Button className="mb-2" as="input" type="button" value="Войти" />
+            <Button className="mb-2" as="input" type="submit" value="Войти" />
             <Button
               className="mb-2"
               as="input"
-              type="button"
+              type="submit"
               value="Войти с помощью Google"
             />
           </Stack>

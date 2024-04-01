@@ -1,32 +1,25 @@
 import { Button, FormGroup, Stack } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import "../styles/App.scss";
-import logo from "../images/logo owl book.png";
+import logo from "../../assets/logo owl book.png";
 import { useState } from "react";
-import axios from "axios";
+import { register } from "../../data/apiService";
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.currentTarget.value);
-  const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
-  const changeName = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.currentTarget.value);
+  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setEmail(e.currentTarget.value);
+  const changePassword = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setPassword(e.currentTarget.value);
+  const changeName = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setName(e.currentTarget.value);
 
   const handleSubmit = async () => {
-    const user = {
-      name: name,
-      email: email,
-      password: password,
-    };
-
     try {
-      const result = await axios.post(
-        "http://localhost:8080/auth/register",
-        user,
-      );
-
+      const result = await register(name, email, password);
       console.log(result);
     } catch (e) {
       console.log(e);

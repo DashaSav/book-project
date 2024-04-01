@@ -11,10 +11,14 @@ export default function Profile() {
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
 
-  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.currentTarget.value);
-  const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
-  const changeName = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.currentTarget.value);
-  const changePasswordRepeat = (e: React.ChangeEvent<HTMLInputElement>) => setPasswordRepeat(e.currentTarget.value);
+  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setEmail(e.currentTarget.value);
+  const changePassword = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setPassword(e.currentTarget.value);
+  const changeName = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setName(e.currentTarget.value);
+  const changePasswordRepeat = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setPasswordRepeat(e.currentTarget.value);
 
   return (
     <>

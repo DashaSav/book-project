@@ -1,9 +1,9 @@
 import { Card, Button } from "react-bootstrap";
-import logo from "../images/logo owl book.png";
+import logo from "../../assets/logo owl book.png";
 import { useNavigate } from "react-router-dom";
 
-type BookProps = { book: IBook; }
-export default function Book({ book } : BookProps) {
+type BookProps = { book: IBook };
+export default function Book({ book }: BookProps) {
   const navigate = useNavigate();
   const handleReadClick = () => navigate("/bookpage");
 
@@ -14,8 +14,7 @@ export default function Book({ book } : BookProps) {
         <Card.Body>
           <Card.Title>{book.title}</Card.Title>
           <Card.Text>{book.author}</Card.Text>
-          <Card.Text>{book.description}
-          </Card.Text>
+          <Card.Text>{book.description}</Card.Text>
           <Button variant="primary" onClick={handleReadClick}>
             Читать
           </Button>

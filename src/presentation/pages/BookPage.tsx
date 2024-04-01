@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import "../styles/App.scss";
 import Container from "react-bootstrap/Container";
-import logo from "../images/logo owl book.png";
+import logo from "../../assets/logo owl book.png";
 import BooksNavbar from "../components/BooksNavbar";
 
 export default function BookPage() {
