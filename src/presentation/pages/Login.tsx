@@ -35,7 +35,7 @@ function Login() {
 
         <Form onSubmit={handleSubmit}>
           {/*EMAIL*/}
-          <Form.Group className="mb-2" controlId="formEmail">
+          <Form.Group className="mb-2">
             <Form.Label>Почта</Form.Label>
             <Form.Control
               value={email}
@@ -46,7 +46,7 @@ function Login() {
           </Form.Group>
 
           {/*Пароль*/}
-          <Form.Group className="mb-2" controlId="formPassword">
+          <Form.Group className="mb-2">
             <Form.Label>Пароль</Form.Label>
             <Form.Control
               type="password"

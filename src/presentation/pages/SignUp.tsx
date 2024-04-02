@@ -37,7 +37,7 @@ function SignUp() {
 
         {/*Ввод имени*/}
         <Form onSubmit={handleSubmit}>
-          <FormGroup className="mb-2" controlId="formName">
+          <FormGroup className="mb-2">
             <Form.Label>Имя</Form.Label>
             <Form.Control
               value={name}
@@ -48,7 +48,7 @@ function SignUp() {
           </FormGroup>
 
           {/*EMAIL*/}
-          <FormGroup className="mb-2" controlId="formEmail">
+          <FormGroup className="mb-2">
             <Form.Label>Почта</Form.Label>
             <Form.Control
               value={email}
@@ -59,7 +59,7 @@ function SignUp() {
           </FormGroup>
 
           {/*Пароль*/}
-          <FormGroup className="mb-4" controlId="formPassword">
+          <FormGroup className="mb-4">
             <Form.Label>Пароль</Form.Label>
             <Form.Control
               id="inputPassword"
