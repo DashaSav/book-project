@@ -6,10 +6,23 @@
 .content{
   width: 70%;
   align-content: center;
-  margin: 4% auto;
+  margin: 2.5% auto;
 }
-p .header{
-  margin: 0 auto;
+
+.contentProfile{
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.save{
+  width: 50%;
+}
+
+.header{
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .my-cont img {

@@ -1,7 +1,7 @@
 import { Button, FloatingLabel } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import "../styles/App.scss";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Container from "react-bootstrap/Container";
 import BooksNavbar from "../components/BooksNavbar";
 import { addChapter } from "../../data/apiService";
