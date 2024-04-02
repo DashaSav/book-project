@@ -17,7 +17,7 @@ function SignUp() {
   const changeName = (e: React.ChangeEvent<HTMLInputElement>) =>
     setName(e.currentTarget.value);
 
-  const handleSubmit = async () => {
+  const handleSignup = async () => {
     try {
       const result = await register(name, email, password);
       console.log(result);
@@ -36,7 +36,7 @@ function SignUp() {
         </div>
 
         {/*Ввод имени*/}
-        <Form onSubmit={handleSubmit}>
+        <Form>
           <FormGroup className="mb-2">
             <Form.Label>Имя</Form.Label>
             <Form.Control
@@ -81,12 +81,14 @@ function SignUp() {
             <Button
               className="mb-2"
               as="input"
-              type="submit"
+              onClick={handleSignup}
+              type="button"
               value="Зарегистрироваться"
             />
             <Button
               as="input"
-              type="submit"
+              type="button"
+              onClick={handleSignup}
               value="Зарегистрироваться через Google"
             />
           </Stack>

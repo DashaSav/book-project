@@ -9,9 +9,9 @@ export const register = async (
   password: string,
 ) => {
   const response = await axios.post(API_URL + "auth/register", {
-    name: name,
-    email: email,
-    password: password,
+    email,
+    name,
+    password,
   });
 
   if (response.status < 400 && response.data.token) {
@@ -23,8 +23,8 @@ export const register = async (
 
 export const login = async (email: string, password: string) => {
   const response = await axios.post(API_URL + "auth/login", {
-    email: email,
-    password: password,
+    email,
+    password,
   });
 
   console.log(response.data);
@@ -35,7 +35,11 @@ export const login = async (email: string, password: string) => {
   return response.data;
 };
 
-export const addChapter = async (chapterName: string, chapterText: string, authorComment: string) => {
+export const addChapter = async (
+  chapterName: string,
+  chapterText: string,
+  authorComment: string,
+) => {
   const response = await axios.post(API_URL + "auth/login", {
     chapterName: chapterName,
     chapterText: chapterText,

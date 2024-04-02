@@ -1,7 +1,7 @@
-import { Button, FloatingLabel } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import "../styles/App.scss";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import BooksNavbar from "../components/BooksNavbar";
 import { addChapter } from "../../data/apiService";
@@ -20,7 +20,7 @@ export default function Editor() {
   const changeAuthorComment = (e: React.ChangeEvent<HTMLInputElement>) =>
     setAuthorComment(e.currentTarget.value);
 
-  const handleSubmit = async () => {
+  const handleSendChapter = async () => {
     try {
       const result = await addChapter(chapterName, chapterText, authorComment);
       console.log(result);
@@ -28,6 +28,7 @@ export default function Editor() {
       console.log(e);
     }
   };
+
   return (
     <>
       <BooksNavbar />
@@ -75,6 +76,7 @@ export default function Editor() {
           <Button
             type="submit"
             className="mb-2"
+            onClick={handleSendChapter}
             as="input"
             value="Сохранить и перейти к публикации"
           />

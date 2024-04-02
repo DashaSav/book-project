@@ -15,7 +15,7 @@ function Login() {
   const changePassword = (e: React.ChangeEvent<HTMLInputElement>) =>
     setPassword(e.currentTarget.value);
 
-  const handleSubmit = async () => {
+  const handleLogin = async () => {
     try {
       const result = await login(email, password);
       console.log(result);
@@ -33,7 +33,7 @@ function Login() {
           <p>С возвращением! Пожалуйста, введите свои данные</p>
         </div>
 
-        <Form onSubmit={handleSubmit}>
+        <Form>
           {/*EMAIL*/}
           <Form.Group className="mb-2">
             <Form.Label>Почта</Form.Label>
@@ -69,11 +69,18 @@ function Login() {
           </a>
 
           <Stack className="mt-3">
-            <Button className="mb-2" as="input" type="submit" value="Войти" />
             <Button
               className="mb-2"
               as="input"
-              type="submit"
+              type="button"
+              onClick={handleLogin}
+              value="Войти"
+            />
+            <Button
+              className="mb-2"
+              as="input"
+              type="button"
+              onClick={handleLogin}
               value="Войти с помощью Google"
             />
           </Stack>
