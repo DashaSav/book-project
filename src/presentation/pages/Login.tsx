@@ -38,6 +38,7 @@ function Login() {
           <Form.Group className="mb-2">
             <Form.Label>Почта</Form.Label>
             <Form.Control
+              name="userName"
               value={email}
               onChange={changeEmail}
               type="email"
@@ -50,7 +51,7 @@ function Login() {
             <Form.Label>Пароль</Form.Label>
             <Form.Control
               type="password"
-              id="inputPassword"
+              name="userPassword"
               value={password}
               onChange={changePassword}
               aria-describedby="passwordHelpBlock"

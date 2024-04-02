@@ -40,6 +40,7 @@ function SignUp() {
           <FormGroup className="mb-2">
             <Form.Label>Имя</Form.Label>
             <Form.Control
+              name="userName"
               value={name}
               onChange={changeName}
               type="text"
@@ -51,6 +52,7 @@ function SignUp() {
           <FormGroup className="mb-2">
             <Form.Label>Почта</Form.Label>
             <Form.Control
+              name="userEmail"
               value={email}
               onChange={changeEmail}
               type="email"
@@ -62,7 +64,7 @@ function SignUp() {
           <FormGroup className="mb-4">
             <Form.Label>Пароль</Form.Label>
             <Form.Control
-              id="inputPassword"
+              name="userPassword"
               value={password}
               onChange={changePassword}
               type="password"

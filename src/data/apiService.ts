@@ -35,6 +35,21 @@ export const login = async (email: string, password: string) => {
   return response.data;
 };
 
+export const addChapter = async (chapterName: string, chapterText: string, authorComment: string) => {
+  const response = await axios.post(API_URL + "auth/login", {
+    chapterName: chapterName,
+    chapterText: chapterText,
+    authorComment: authorComment,
+  });
+
+  console.log(response.data);
+
+  if (response.status < 400 && response.data.token) {
+    saveToken(response.data.token);
+  }
+  return response.data;
+};
+
 export const logout = () => removeToken();
 
 export async function getBooks(): Promise<IBook[]> {
