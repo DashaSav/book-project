@@ -7,6 +7,7 @@ import MainPage from "../presentation/pages/MainPage";
 import NotFoundPage from "../presentation/pages/NotFoundPage";
 import Profile from "../presentation/pages/Profile";
 import SignUp from "../presentation/pages/SignUp";
+import AddChapter from "../presentation/pages/AddChapter";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
+  },
+  {
+    path: "/addchapter",
+    element: <AddChapter />,
   },
 ]);
 

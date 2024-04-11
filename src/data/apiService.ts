@@ -14,7 +14,7 @@ export const register = async (
     password,
   });
 
-  if (response.status < 400 && response.data.token) {
+  if (response.status >= 200 && response.status < 300 && response.data.token) {
     saveToken(response.data.token);
   }
 
@@ -29,7 +29,7 @@ export const login = async (email: string, password: string) => {
 
   console.log(response.data);
 
-  if (response.status < 400 && response.data.token) {
+  if (response.status >= 200 && response.status < 300 && response.data.token) {
     saveToken(response.data.token);
   }
   return response.data;
@@ -48,7 +48,7 @@ export const addChapter = async (
 
   console.log(response.data);
 
-  if (response.status < 400 && response.data.token) {
+  if (response.status >= 200 && response.status < 300 && response.data.token) {
     saveToken(response.data.token);
   }
   return response.data;

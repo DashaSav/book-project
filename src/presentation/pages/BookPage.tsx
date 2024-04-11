@@ -2,8 +2,9 @@ import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import "../styles/App.scss";
 import Container from "react-bootstrap/Container";
-import logo from "../../assets/logo owl book.png";
+import logo from "../../assets/logoOwlBook.png";
 import BooksNavbar from "../components/BooksNavbar";
+import StarRating from "../components/StarRating";
 
 export default function BookPage() {
   return (
@@ -14,7 +15,7 @@ export default function BookPage() {
         <h2>Название книги</h2>
         <Container className="imgRating">
           <img src={logo} alt="logo" />
-          <h5>Тут должна быть оценка</h5>
+          <StarRating></StarRating>
           <h2>Содержание</h2>
           <h5>Тут как то сделать список глав с ссылками</h5>
         </Container>

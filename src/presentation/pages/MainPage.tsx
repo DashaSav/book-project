@@ -12,7 +12,7 @@ function MainPage() {
     getBooks()
       .then((books) => setBooks(books))
       .catch((e) => console.log(e));
-  });
+  }, [books]);
 
   return (
     <>

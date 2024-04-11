@@ -1,22 +1,20 @@
 import { Card, Button } from "react-bootstrap";
-import logo from "../../assets/logoOwlBook.png";
 import { useNavigate } from "react-router-dom";
 
-type BookProps = { book: IBook };
-export default function Book({ book }: BookProps) {
+type CommentProps = { comment: IComment };
+export default function Comment({ comment }: CommentProps) {
   const navigate = useNavigate();
   const handleReadClick = () => navigate("/bookpage");
 
   return (
     <>
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={logo} />
         <Card.Body>
-          <Card.Title>{book.title}</Card.Title>
-          <Card.Text>{book.author}</Card.Text>
-          <Card.Text>{book.description}</Card.Text>
+          <Card.Title>{comment.author}</Card.Title>
+          <Card.Text>{comment.description}</Card.Text>
+          <Card.arguments>{comment.likes}</Card.arguments>
           <Button variant="primary" onClick={handleReadClick}>
-            Читать
+            Отправить
           </Button>
         </Card.Body>
       </Card>

@@ -3,26 +3,16 @@ import BooksNavbar from "../components/BooksNavbar";
 import "../styles/App.scss";
 import Container from "react-bootstrap/Container";
 
-export default function AddBook() {
+export default function AddChapter() {
   const ageOptions = ["6+", "12+", "16+", "18+"];
 
   return (
     <>
       <BooksNavbar />
+
       <Container className="content">
         <h2>Добавить новую книгу</h2>
         <Container className="inputText">
-          <h3>Название</h3>
-          <h3>Ограничение по возрасту</h3>
-          <h3>Метки, текстовое поле</h3>
-          <h3>Краткое описание работы, текстовое поле</h3>
-          <h3>Тут запрет или разрешение на пуббликацю комментариев</h3>
-          <h3>
-            Я подтверждаю, что являюсь автором публикуемого мной текста и
-            понимаю, что публикация чужих работ или публикация работ, нарушающих
-            правила, может привести к удалению этих работ и блокировке к доступу
-            на сайт
-          </h3>
           <h3>Текстовый редактор</h3>
           <FloatingLabel
             controlId="chapterText"
