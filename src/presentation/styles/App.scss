@@ -60,52 +60,42 @@ p {
   background-color: #E7F1FF
 }
 
-.rating{
-  display: flex;
-  align-items: flex-end;
-  font-size: 40px;
-  line-height: 0.75;
+.star-rating {
+  font-size: 24px;
+  display: inline-block;
+  margin: 10px;
 }
-.rating_body{
-  position: relative;
-}
-.rating_body::before{
-    content:"★★★★★";
-    display: block;
-}
-.rating_active{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-}
-.rating_active::before{
-  content: "★★★★★";
-  position: absolute;
-  width: 0%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  color: #ffd300;
 
+.star {
+  color: #ccc;
+  cursor: pointer;
 }
-.rating_items{
-  display: flex;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+
+.highlighted {
+  color: gold;
 }
-.rating_item{
-  flex: 0 0 20%;
-  height: 100%;
-  opacity: 0;
+
+.comment {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #f9f9f9;
 }
-.rating_value{
-  font-size: 50%;
-  line-height: 1;
-  padding: 0px 0px 0px 10px;
+
+.comment .author {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.comment .likes {
+  margin-right: 10px;
+}
+
+.comment .content {
+  margin-bottom: 10px;
+}
+
+.comment .btn {
+  margin-right: 10px;
 }

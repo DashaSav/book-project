@@ -1,23 +1,32 @@
-import { Card, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Card, Button, Badge } from "react-bootstrap";
+import "../styles/App.scss";
 
-type CommentProps = { comment: IComment };
-export default function Comment({ comment }: CommentProps) {
-  const navigate = useNavigate();
-  const handleReadClick = () => navigate("/bookpage");
+interface CommentProps {
+  author: string;
+  content: string;
+  likes: number;
+}
+
+const Comment = ({ author, content, likes }: CommentProps) => {
+  const [likeCount, setLikeCount] = useState(likes);
+
+  const handleLikeClick = () => {
+    setLikeCount(likeCount + 1);
+  };
 
   return (
-    <>
-      <Card style={{ width: "18rem" }}>
-        <Card.Body>
-          <Card.Title>{comment.author}</Card.Title>
-          <Card.Text>{comment.description}</Card.Text>
-          <Card.arguments>{comment.likes}</Card.arguments>
-          <Button variant="primary" onClick={handleReadClick}>
-            Отправить
-          </Button>
-        </Card.Body>
-      </Card>
-    </>
+    <Card className="comment">
+      <Card.Body>
+        <Card.Title>{author}</Card.Title>
+        <Card.Text>{content}</Card.Text>
+        <Button variant="primary" onClick={handleLikeClick}>
+          Лайк <Badge>{likeCount}</Badge>
+        </Button>{" "}
+        <Button variant="danger">Пожаловаться</Button>
+      </Card.Body>
+    </Card>
   );
-}
+};
+
+export default Comment;

@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import logo from "../../assets/logoOwlBook.png";
 import BooksNavbar from "../components/BooksNavbar";
 import StarRating from "../components/StarRating";
+import Comment from "../components/Comment";
 
 export default function BookPage() {
   return (
@@ -15,7 +16,7 @@ export default function BookPage() {
         <h2>Название книги</h2>
         <Container className="imgRating">
           <img src={logo} alt="logo" />
-          <StarRating></StarRating>
+          <StarRating initialValue={3}></StarRating>
           <h2>Содержание</h2>
           <h5>Тут как то сделать список глав с ссылками</h5>
         </Container>
@@ -45,6 +46,8 @@ export default function BookPage() {
           />
           <Button className="mb-2" as="input" type="button" value="Отправить" />
           <h2>Тут будет список комментариев</h2>
+
+          <Comment author="Aaaaa" content="teststeststest" likes={1}></Comment>
         </Container>
       </Container>
     </>
