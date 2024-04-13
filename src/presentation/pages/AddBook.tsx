@@ -1,14 +1,13 @@
 import { FloatingLabel, Form } from "react-bootstrap";
-import BooksNavbar from "../components/BooksNavbar";
 import "../styles/App.scss";
 import Container from "react-bootstrap/Container";
+import DefaultPageLayout from "./DefaultPage";
 
 export default function AddBook() {
   const ageOptions = ["6+", "12+", "16+", "18+"];
 
   return (
-    <>
-      <BooksNavbar />
+    <DefaultPageLayout>
       <Container className="content">
         <h2>Добавить новую книгу</h2>
         <Container className="inputText">
@@ -41,6 +40,6 @@ export default function AddBook() {
           ))}
         </Form>
       </Container>
-    </>
+    </DefaultPageLayout>
   );
 }

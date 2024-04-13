@@ -57,7 +57,8 @@ p {
 }
 
 .bg-default {
-  background-color: #E7F1FF
+  background-color: #E7F1FF;
+  border-bottom: 1px solid #67676741;
 }
 
 .star-rating {
@@ -98,4 +99,28 @@ p {
 
 .comment .btn {
   margin-right: 10px;
+}
+
+.sidebar {
+  background-color: #E7F1FF;
+  height: 100vh;
+  padding: 20px;
+  border-right: 1px solid #67676741;
+}
+
+.sidebar .nav-link {
+  color: #333;
+}
+
+.sidebar .nav-link:hover {
+  color: #000;
+}
+
+.no-gutters {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.brand {
+  font-weight: 700;
 }

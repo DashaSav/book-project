@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import "../styles/App.scss";
 import Container from "react-bootstrap/Container";
 import { useState } from "react";
-import BooksNavbar from "../components/BooksNavbar";
+import DefaultPageLayout from "./DefaultPage";
 
 export default function Profile() {
   const [email, setEmail] = useState("");
@@ -21,9 +21,7 @@ export default function Profile() {
     setPasswordRepeat(e.currentTarget.value);
 
   return (
-    <>
-      <BooksNavbar />
-
+    <DefaultPageLayout>
       <Container className="mt-5 d-flex w-50 align-content-center flex-wrap">
         <Stack direction="vertical" className="d-flex align-items-center">
           <h2 className="header">Добро пожаловать, Иван Иванов</h2>
@@ -72,6 +70,6 @@ export default function Profile() {
           />
         </Stack>
       </Container>
-    </>
+    </DefaultPageLayout>
   );
 }

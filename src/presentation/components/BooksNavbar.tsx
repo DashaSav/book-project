@@ -1,4 +1,4 @@
-import { Navbar, Form, Button, Container, Stack, Col } from "react-bootstrap";
+import { Navbar, Form, Button, Stack, Col, Container } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,10 +13,9 @@ export default function BooksNavbar() {
   return (
     <>
       <Navbar expand="lg" className="bg-default">
-        <Container>
-          <Navbar.Brand href="/">Books</Navbar.Brand>
+        <Container className="px-5" fluid>
+          <Navbar.Brand className="brand" href="/">Books</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
           <Col xs={6}>
             <Form role="search">
               <Stack direction="horizontal">

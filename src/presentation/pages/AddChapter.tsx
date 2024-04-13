@@ -3,8 +3,8 @@ import Form from "react-bootstrap/Form";
 import "../styles/App.scss";
 import { useState } from "react";
 import Container from "react-bootstrap/Container";
-import BooksNavbar from "../components/BooksNavbar";
 import { addChapter } from "../../data/apiService";
+import DefaultPageLayout from "./DefaultPage";
 
 export default function AddChapter() {
   const [chapterName, setChapterName] = useState("");
@@ -30,9 +30,7 @@ export default function AddChapter() {
   };
 
   return (
-    <>
-      <BooksNavbar />
-
+    <DefaultPageLayout>
       <Container className="content">
         <h2 className="header">Добавить новую часть</h2>
         <Form>
@@ -82,6 +80,6 @@ export default function AddChapter() {
           />
         </Form>
       </Container>
-    </>
+    </DefaultPageLayout>
   );
 }

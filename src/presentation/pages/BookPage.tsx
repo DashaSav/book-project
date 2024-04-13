@@ -3,15 +3,13 @@ import Form from "react-bootstrap/Form";
 import "../styles/App.scss";
 import Container from "react-bootstrap/Container";
 import logo from "../../assets/logoOwlBook.png";
-import BooksNavbar from "../components/BooksNavbar";
 import StarRating from "../components/StarRating";
 import Comment from "../components/Comment";
+import DefaultPageLayout from "./DefaultPage";
 
 export default function BookPage() {
   return (
-    <>
-      <BooksNavbar />
-
+    <DefaultPageLayout>
       <Container>
         <h2>Название книги</h2>
         <Container className="imgRating">
@@ -50,6 +48,6 @@ export default function BookPage() {
           <Comment author="Aaaaa" content="teststeststest" likes={1}></Comment>
         </Container>
       </Container>
-    </>
+    </DefaultPageLayout>
   );
 }

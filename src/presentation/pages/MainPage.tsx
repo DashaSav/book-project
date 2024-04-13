@@ -1,9 +1,9 @@
 import "../styles/App.scss";
 import Book from "../components/Book";
-import BooksNavbar from "../components/BooksNavbar";
-import { Container, Stack } from "react-bootstrap";
+import { Stack } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { getBooks } from "../../data/apiService";
+import DefaultPageLayout from "./DefaultPage";
 
 function MainPage() {
   const [books, setBooks] = useState<IBook[]>([]);
@@ -15,17 +15,14 @@ function MainPage() {
   }, [books]);
 
   return (
-    <>
-      <BooksNavbar />
-      <Container>
-        <h4 className="mb-2 mt-2">Популярные</h4>
-        <Stack direction="horizontal">
-          {books.map((book) => (
-            <Book book={book} />
-          ))}
-        </Stack>
-      </Container>
-    </>
+    <DefaultPageLayout>
+      <h4 className="mb-2 mt-2">Популярные</h4>
+      <Stack direction="horizontal">
+        {books.map((book) => (
+          <Book book={book} />
+        ))}
+      </Stack>
+    </DefaultPageLayout>
   );
 }
 
