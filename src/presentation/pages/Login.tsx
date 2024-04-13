@@ -4,10 +4,12 @@ import "../styles/App.scss";
 import logo from "../../assets/logoOwlBook.png";
 import { useState } from "react";
 import { login } from "../../data/apiService";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmail(e.currentTarget.value);
@@ -15,12 +17,21 @@ function Login() {
   const changePassword = (e: React.ChangeEvent<HTMLInputElement>) =>
     setPassword(e.currentTarget.value);
 
+  const resetStates = () => {
+    setEmail("");
+    setPassword("");
+  };
+
   const handleLogin = async () => {
     try {
       const result = await login(email, password);
-      console.log(result);
+
+      if (result.status >= 200 && result.status < 300) {
+        navigate("/");
+      }
     } catch (e) {
       console.log(e);
+      resetStates();
     }
   };
 
@@ -95,3 +106,4 @@ function Login() {
 }
 
 export default Login;
+

@@ -18,7 +18,10 @@ export const register = async (
     saveToken(response.data.token);
   }
 
-  return response.data;
+  return {
+    status: response.status,
+    data: response.data
+  };
 };
 
 export const login = async (email: string, password: string) => {
@@ -32,7 +35,10 @@ export const login = async (email: string, password: string) => {
   if (response.status >= 200 && response.status < 300 && response.data.token) {
     saveToken(response.data.token);
   }
-  return response.data;
+  return {
+    status: response.status,
+    data: response.data
+  };
 };
 
 export const addChapter = async (

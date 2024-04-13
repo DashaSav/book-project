@@ -4,11 +4,13 @@ import "../styles/App.scss";
 import logo from "../../assets/logoOwlBook.png";
 import { useState } from "react";
 import { register } from "../../data/apiService";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmail(e.currentTarget.value);
@@ -17,12 +19,22 @@ function SignUp() {
   const changeName = (e: React.ChangeEvent<HTMLInputElement>) =>
     setName(e.currentTarget.value);
 
+  const resetStates = () => {
+    setEmail("");
+    setPassword("");
+    setName("")
+  };
+
   const handleSignup = async () => {
     try {
       const result = await register(name, email, password);
-      console.log(result);
+      
+      if (result.status >= 200 && result.status < 300) {
+        navigate("/");
+      }
     } catch (e) {
       console.log(e);
+      resetStates();
     }
   };
 
