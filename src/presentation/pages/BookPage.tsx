@@ -6,12 +6,27 @@ import logo from "../../assets/logoOwlBook.png";
 import StarRating from "../components/StarRating";
 import Comment from "../components/Comment";
 import DefaultPageLayout from "./DefaultPage";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getBook } from "../../data/apiService";
 
 export default function BookPage() {
+  const { id } = useParams();
+
+  const [book, setBook] = useState<IBook>();
+
+  useEffect(() => {
+    if (id == undefined) return;
+
+    getBook(id)
+      .then((fetched) => setBook(fetched))
+      .catch((e) => console.log(e));
+  }, []);
+
   return (
     <DefaultPageLayout>
       <Container>
-        <h2>Название книги</h2>
+        <h2>{book?.title ?? "Название книги"}</h2>
         <Container className="imgRating">
           <img src={logo} alt="logo" />
           <StarRating initialValue={3}></StarRating>
@@ -20,13 +35,10 @@ export default function BookPage() {
         </Container>
         <Container className="AboutBook">
           <p>
-            Lorem ipsum dolor sit amet, vince adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in
-            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            {book?.description ??
+              "Lorem ipsum dolor sit amet, vince adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
           </p>
-          <p>Автор</p>
+          <p>{book?.author ?? "Автор книги"}</p>
           <p>Персонажи</p>
           <p>Возрастное ограничение</p>
           <p>Жанры</p>

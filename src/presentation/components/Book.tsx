@@ -2,10 +2,11 @@ import { Card, Button } from "react-bootstrap";
 import logo from "../../assets/logoOwlBook.png";
 import { useNavigate } from "react-router-dom";
 
-type BookProps = { book: IBook };
+type BookProps = { book: DBBook };
+
 export default function Book({ book }: BookProps) {
   const navigate = useNavigate();
-  const handleReadClick = () => navigate("/bookpage");
+  const handleReadClick = () => navigate("/bookpage/" + book._id);
 
   return (
     <>

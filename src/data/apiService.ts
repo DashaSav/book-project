@@ -8,24 +8,24 @@ export const register = async (
   email: string,
   password: string,
 ) => {
-  const response = await axios.post(API_URL + "auth/register", {
+  const response = await axios.post(API_URL + "users/", {
     email,
     name,
     password,
   });
 
   if (response.status >= 200 && response.status < 300 && response.data.token) {
-    saveToken(response.data.token);
+    saveToken(response.data.token["access_token"]);
   }
 
   return {
     status: response.status,
-    data: response.data
+    data: response.data,
   };
 };
 
 export const login = async (email: string, password: string) => {
-  const response = await axios.post(API_URL + "auth/login", {
+  const response = await axios.post(API_URL + "users/login", {
     email,
     password,
   });
@@ -33,12 +33,25 @@ export const login = async (email: string, password: string) => {
   console.log(response.data);
 
   if (response.status >= 200 && response.status < 300 && response.data.token) {
-    saveToken(response.data.token);
+    saveToken(response.data.token["access_token"]);
   }
+
   return {
     status: response.status,
-    data: response.data
+    data: response.data,
   };
+};
+
+export const getUser = async (id: string) => {
+  const response = await axios.post(API_URL + "users/" + id);
+
+  console.log(response.data);
+
+  const user: IUser = {
+    name: response.data["name"],
+    email: response.data["email"],
+  };
+  return user;
 };
 
 export const addChapter = async (
@@ -46,7 +59,7 @@ export const addChapter = async (
   chapterText: string,
   authorComment: string,
 ) => {
-  const response = await axios.post(API_URL + "auth/login", {
+  const response = await axios.post(API_URL + "chapters/", {
     chapterName: chapterName,
     chapterText: chapterText,
     authorComment: authorComment,
@@ -62,6 +75,19 @@ export const addChapter = async (
 
 export const logout = () => removeToken();
 
-export async function getBooks(): Promise<IBook[]> {
-  return (await axios.get(API_URL + "books")).data["_embedded"]["books"];
+export async function getBooks(): Promise<DBBook[]> {
+  return (await axios.get(API_URL + "books/")).data;
 }
+
+export const getBook = async (id: string) => {
+  const response = await axios.get(API_URL + "books/" + id);
+
+  console.log(response.data);
+
+  const book: IBook = {
+    title: response.data["title"],
+    author: response.data["author"],
+    description: response.data["description"],
+  };
+  return book;
+};

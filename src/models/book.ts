@@ -3,3 +3,7 @@ interface IBook {
   title: string;
   description: string;
 }
+
+type DBBook = IBook & {
+  _id: string;
+};

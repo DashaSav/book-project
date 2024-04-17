@@ -6,6 +6,8 @@ import { useState } from "react";
 import DefaultPageLayout from "./DefaultPage";
 
 export default function Profile() {
+  const [username, setUsername] = useState("Иван Иванов");
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +26,7 @@ export default function Profile() {
     <DefaultPageLayout>
       <Container className="mt-5 d-flex w-50 align-content-center flex-wrap">
         <Stack direction="vertical" className="d-flex align-items-center">
-          <h2 className="header">Добро пожаловать, Иван Иванов</h2>
+          <h2 className="header">Добро пожаловать, {username}</h2>
           <Container className="UserInformation">
             <FormGroup className="mb-2" controlId="formName">
               <Form.Label>Имя</Form.Label>

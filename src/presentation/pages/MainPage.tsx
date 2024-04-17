@@ -6,13 +6,13 @@ import { getBooks } from "../../data/apiService";
 import DefaultPageLayout from "./DefaultPage";
 
 function MainPage() {
-  const [books, setBooks] = useState<IBook[]>([]);
+  const [books, setBooks] = useState<DBBook[]>([]);
 
   useEffect(() => {
     getBooks()
       .then((books) => setBooks(books))
       .catch((e) => console.log(e));
-  }, [books]);
+  }, []);
 
   return (
     <DefaultPageLayout>
