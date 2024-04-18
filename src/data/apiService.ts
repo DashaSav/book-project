@@ -93,15 +93,9 @@ export const getBook = async (id: string) => {
 };
 
 export async function getComments(): Promise<IComment[]> {
-  return (await axios.get(API_URL + "comments")).data["_embedded"]["comments"];
-}
-export async function getFavourites(): Promise<IBook[]> {
-  return (await axios.get(API_URL + "books")).data["_embedded"]["books"];
+  return (await axios.get(API_URL + "comments/")).data;
 }
 
-export async function getComments(): Promise<IComment[]> {
-  return (await axios.get(API_URL + "comments")).data["_embedded"]["comments"];
-}
-export async function getFavourites(): Promise<IBook[]> {
-  return (await axios.get(API_URL + "books")).data["_embedded"]["books"];
+export async function getFavorites(): Promise<DBBook[]> {
+  return (await axios.get(API_URL + "books/")).data;
 }

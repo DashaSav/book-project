@@ -8,8 +8,8 @@ import Profile from "../presentation/pages/Profile";
 import SignUp from "../presentation/pages/SignUp";
 import AddChapter from "../presentation/pages/AddChapter";
 import MyComments from "../presentation/pages/MyComments";
-import Favourites from "../presentation/pages/Favourites";
 import MyBooks from "../presentation/pages/MyBooks";
+import Favorites from "../presentation/pages/Favorites";
 
 const router = createBrowserRouter([
   {
@@ -42,16 +42,16 @@ const router = createBrowserRouter([
     element: <AddChapter />,
   },
   {
-    path: "/MyComments",
+    path: "/my_comments",
     element: <MyComments />,
   },
   {
-    path: "/MyBooks",
+    path: "/my_books",
     element: <MyBooks />,
   },
   {
-    path: "/Favourites",
-    element: <Favourites />,
+    path: "/favorites",
+    element: <Favorites />,
   },
 ]);
 

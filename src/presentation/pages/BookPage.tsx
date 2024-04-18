@@ -15,6 +15,12 @@ export default function BookPage() {
 
   const [book, setBook] = useState<IBook>();
 
+  const exampleComment: IComment = {
+    author: "string",
+    description: "string",
+    likes: 1,
+  };
+
   useEffect(() => {
     if (id == undefined) return;
 
@@ -57,7 +63,7 @@ export default function BookPage() {
           <Button className="mb-2" as="input" type="button" value="Отправить" />
           <h2>Тут будет список комментариев</h2>
 
-          <Comment author="Aaaaa" content="teststeststest" likes={1}></Comment>
+          <Comment comment={exampleComment} />
         </Container>
       </Container>
     </DefaultPageLayout>

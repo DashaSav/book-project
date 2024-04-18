@@ -5,7 +5,7 @@ import { Stack } from "react-bootstrap";
 import Book from "../components/Book";
 
 export default function MyBooks() {
-  const [books, setBooks] = useState<IBook[]>([]);
+  const [books, setBooks] = useState<DBBook[]>([]);
 
   useEffect(() => {
     getBooks()
@@ -15,7 +15,7 @@ export default function MyBooks() {
   return (
     <>
       <DefaultPageLayout>
-        <h4 className="mb-2 mt-2">Популярные</h4>
+        <h4 className="mb-2 mt-2">Мои книги</h4>
         <Stack direction="horizontal">
           {books.map((book) => (
             <Book book={book} />

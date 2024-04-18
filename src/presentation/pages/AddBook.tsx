@@ -2,16 +2,31 @@ import { FloatingLabel, Form } from "react-bootstrap";
 import "../styles/App.scss";
 import Container from "react-bootstrap/Container";
 import DefaultPageLayout from "./DefaultPage";
+import { useState } from "react";
 
 export default function AddBook() {
   const ageOptions = ["6+", "12+", "16+", "18+"];
+
+  const [bookName, setBookName] = useState("");
+
+  const changeBookName = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setBookName(e.currentTarget.value);
 
   return (
     <DefaultPageLayout>
       <Container className="content">
         <h2>Добавить новую книгу</h2>
         <Container className="inputText">
-          <h3>Название</h3>
+          <Form.Group className="mb-2">
+            <Form.Label>Название книги: </Form.Label>
+            <Form.Control
+              name="chapterName"
+              value={bookName}
+              onChange={changeBookName}
+              type="text"
+              placeholder="Вветие название книги"
+            />
+          </Form.Group>
           <h3>Ограничение по возрасту</h3>
           <h3>Метки, текстовое поле</h3>
           <h3>Краткое описание работы, текстовое поле</h3>
