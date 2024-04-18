@@ -7,6 +7,9 @@ import NotFoundPage from "../presentation/pages/NotFoundPage";
 import Profile from "../presentation/pages/Profile";
 import SignUp from "../presentation/pages/SignUp";
 import AddChapter from "../presentation/pages/AddChapter";
+import MyComments from "../presentation/pages/MyComments";
+import Favourites from "../presentation/pages/Favourites";
+import MyBooks from "../presentation/pages/MyBooks";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +40,18 @@ const router = createBrowserRouter([
   {
     path: "/addchapter",
     element: <AddChapter />,
+  },
+  {
+    path: "/MyComments",
+    element: <MyComments />,
+  },
+  {
+    path: "/MyBooks",
+    element: <MyBooks />,
+  },
+  {
+    path: "/Favourites",
+    element: <Favourites />,
   },
 ]);
 

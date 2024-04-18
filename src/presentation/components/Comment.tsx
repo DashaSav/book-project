@@ -3,13 +3,11 @@ import { Card, Button, Badge } from "react-bootstrap";
 import "../styles/App.scss";
 
 interface CommentProps {
-  author: string;
-  content: string;
-  likes: number;
+  comment: IComment;
 }
 
-const Comment = ({ author, content, likes }: CommentProps) => {
-  const [likeCount, setLikeCount] = useState(likes);
+const Comment = ({ comment }: CommentProps) => {
+  const [likeCount, setLikeCount] = useState(comment.likes);
 
   const handleLikeClick = () => {
     setLikeCount(likeCount + 1);
@@ -18,8 +16,8 @@ const Comment = ({ author, content, likes }: CommentProps) => {
   return (
     <Card className="comment">
       <Card.Body>
-        <Card.Title>{author}</Card.Title>
-        <Card.Text>{content}</Card.Text>
+        <Card.Title>{comment.author}</Card.Title>
+        <Card.Text>{comment.description}</Card.Text>
         <Button variant="primary" onClick={handleLikeClick}>
           Лайк <Badge>{likeCount}</Badge>
         </Button>{" "}
