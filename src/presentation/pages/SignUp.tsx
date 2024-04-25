@@ -22,13 +22,13 @@ function SignUp() {
   const resetStates = () => {
     setEmail("");
     setPassword("");
-    setName("")
+    setName("");
   };
 
   const handleSignup = async () => {
     try {
       const result = await register(name, email, password);
-      
+
       if (result.status >= 200 && result.status < 300) {
         navigate("/");
       }
@@ -96,12 +96,6 @@ function SignUp() {
               onClick={handleSignup}
               type="button"
               value="Зарегистрироваться"
-            />
-            <Button
-              as="input"
-              type="button"
-              onClick={handleSignup}
-              value="Зарегистрироваться через Google"
             />
           </Stack>
         </Form>

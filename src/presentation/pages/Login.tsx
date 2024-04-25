@@ -87,13 +87,6 @@ function Login() {
               onClick={handleLogin}
               value="Войти"
             />
-            <Button
-              className="mb-2"
-              as="input"
-              type="button"
-              onClick={handleLogin}
-              value="Войти с помощью Google"
-            />
           </Stack>
         </Form>
 
@@ -106,4 +99,3 @@ function Login() {
 }
 
 export default Login;
-
