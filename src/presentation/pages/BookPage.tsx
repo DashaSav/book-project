@@ -8,24 +8,28 @@ import Comment from "../components/Comment";
 import DefaultPageLayout from "./DefaultPage";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getBook } from "../../data/apiService";
+import { getBook, getComments } from "../../data/apiService";
 
 export default function BookPage() {
   const { id } = useParams();
-
-  const [book, setBook] = useState<IBook>();
 
   const exampleComment: IComment = {
     author: "string",
     description: "string",
     likes: 1,
   };
+  const [book, setBook] = useState<IBook>();
+  const [comments, setComments] = useState<IComment[]>([exampleComment]);
 
   useEffect(() => {
     if (id == undefined) return;
 
     getBook(id)
       .then((fetched) => setBook(fetched))
+      .catch((e) => console.log(e));
+
+    getComments()
+      .then((fetched) => setComments(fetched))
       .catch((e) => console.log(e));
   }, []);
 
@@ -63,7 +67,9 @@ export default function BookPage() {
           <Button className="mb-2" as="input" type="button" value="Отправить" />
           <h2>Тут будет список комментариев</h2>
 
-          <Comment comment={exampleComment} />
+          {comments.map((comment) => (
+            <Comment comment={comment} />
+          ))}
         </Container>
       </Container>
     </DefaultPageLayout>
