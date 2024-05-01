@@ -9,3 +9,11 @@ export function getToken() {
 export function removeToken() {
   localStorage.removeItem("token");
 }
+
+export function saveUserId(id: string) {
+  localStorage.setItem("user_id", id);
+}
+
+export function getUserId() {
+  return localStorage.getItem("user_id");
+}

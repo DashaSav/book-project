@@ -17,6 +17,11 @@
     justify-content: center;
 }
 
+.book-cover {
+  width: 400px;
+  height: 600px;
+}
+
 .save{
   width: 50%;
 }
@@ -123,4 +128,12 @@ p {
 
 .brand {
   font-weight: 700;
+}
+
+.flex-cont {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  row-gap: 2em;
 }

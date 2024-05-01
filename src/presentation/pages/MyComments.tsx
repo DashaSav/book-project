@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import Comment from "../components/Comment";
 import DefaultPageLayout from "./DefaultPage";
 import { Stack } from "react-bootstrap";
-import { getComments } from "../../data/apiService";
+import { getCommentsByUser } from "../../data/apiService";
 
 export default function MyComments() {
   const [comments, setComments] = useState<IComment[]>([]);
 
   useEffect(() => {
-    getComments()
+    getCommentsByUser()
       .then((comments: IComment[]) => setComments(comments))
       .catch((e) => console.log(e));
-  }, [comments]);
+  }, []);
+
   return (
     <>
       <DefaultPageLayout>

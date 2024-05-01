@@ -16,8 +16,8 @@ const Comment = ({ comment }: CommentProps) => {
   return (
     <Card className="comment">
       <Card.Body>
-        <Card.Title>{comment.author}</Card.Title>
-        <Card.Text>{comment.description}</Card.Text>
+        <Card.Title>{comment.user.name}</Card.Title>
+        <Card.Text>{comment.content}</Card.Text>
         <Button variant="primary" onClick={handleLikeClick}>
           Лайк <Badge>{likeCount}</Badge>
         </Button>{" "}
