@@ -1,4 +1,4 @@
-import { FloatingLabel, Form } from "react-bootstrap";
+import { Button, FloatingLabel, Form } from "react-bootstrap";
 import "../styles/App.scss";
 import Container from "react-bootstrap/Container";
 import DefaultPageLayout from "./DefaultPage";
@@ -78,12 +78,12 @@ export default function AddBook() {
                 <Form.Check type="radio" label={option} name="radioGroup" />
               </div>
             ))}
-            <h3>
+            <p>
               Я подтверждаю, что являюсь автором публикуемого мной текста и
               понимаю, что публикация чужих работ или публикация работ,
               нарушающих правила, может привести к удалению этих работ и
               блокировке к доступу на сайт
-            </h3>
+            </p>
           </Container>
         </Form>
       </Container>

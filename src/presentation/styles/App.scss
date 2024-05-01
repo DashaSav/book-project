@@ -10,11 +10,11 @@
   margin: 2.5% auto;
 }
 
-.contentProfile{
-    display: flex;
-    width: 50%;
-    margin: 0 auto;
-    justify-content: center;
+.contentProfile {
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 .book-cover {
@@ -22,11 +22,11 @@
   height: 600px;
 }
 
-.save{
+.save {
   width: 50%;
 }
 
-.header{
+.header {
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -56,13 +56,26 @@ p {
   line-height: 150%;
   size: 16em;
 }
+.buttons-inline {
+  display: inline;
+  align-items: center;
+  padding: 2%;
+  margin: 0 auto;
+}
+.buttons-inline .edit {
+  width: 60%;
+  margin-right: 4%;
+}
+.buttons-inline .delete {
+  width: 35%;
+}
 
 .my-cont .header {
   text-align: center;
 }
 
 .bg-default {
-  background-color: #E7F1FF;
+  background-color: #e7f1ff;
   border-bottom: 1px solid #67676741;
 }
 
@@ -107,7 +120,7 @@ p {
 }
 
 .sidebar {
-  background-color: #E7F1FF;
+  background-color: #e7f1ff;
   height: 100vh;
   padding: 20px;
   border-right: 1px solid #67676741;

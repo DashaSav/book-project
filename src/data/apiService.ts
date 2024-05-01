@@ -7,7 +7,7 @@ import {
   saveUserId,
 } from "./storage";
 
-const API_URL = "http://localhost:8080/";
+const API_URL = "http://5.tcp.eu.ngrok.io:18400/";
 
 // #region user and auth flow
 export const register = async (
@@ -50,6 +50,12 @@ export const login = async (email: string, password: string) => {
     data: response.data,
   };
 };
+
+export const deleteBook = async (id: string) => {
+  const response = await axios.delete(API_URL + "books/" + id, {
+    headers: getHeaders(),
+  });
+}
 
 export const getUser = async (id: string) => {
   const response = await axios.post(API_URL + "users/" + id);
