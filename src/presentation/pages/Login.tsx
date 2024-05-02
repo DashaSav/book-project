@@ -41,7 +41,9 @@ function Login() {
         <img src={logo} className="App-logo" alt="logo" />
         <div className="header">
           <h2>Войдите в свой аккаунт</h2>
-          <p>С возвращением! Пожалуйста, введите свои данные</p>
+          <p className="grey-text">
+            С возвращением! Пожалуйста, введите свои данные
+          </p>
         </div>
 
         <Form>
@@ -90,7 +92,7 @@ function Login() {
           </Stack>
         </Form>
 
-        <p>
+        <p className="grey-text">
           Нет аккаунта? <a href="/signup">Зарегистрироваться</a>
         </p>
       </Stack>

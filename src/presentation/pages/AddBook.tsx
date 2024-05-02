@@ -1,12 +1,13 @@
-import { Button, FloatingLabel, Form } from "react-bootstrap";
+import { Button, Form, Stack } from "react-bootstrap";
 import "../styles/App.scss";
 import Container from "react-bootstrap/Container";
 import DefaultPageLayout from "./DefaultPage";
 import { useState } from "react";
+import { addBook } from "../../data/apiService";
 
 export default function AddBook() {
-  const ageOptions = ["6+", "12+", "16+", "18+"];
-  const allowComment = [
+  const radioAge = ["6+", "12+", "16+", "18+"];
+  const radioComments = [
     "Разрешить публикацию комментариев всем пользователям",
     "Разрешить публикацию комментариев только зарегистрированным пользователям",
     "Запретить публикацию комментариев",
@@ -14,12 +15,42 @@ export default function AddBook() {
 
   const [bookName, setBookName] = useState("");
   const [bookTags, setBookTags] = useState("");
+  const [summary, setSummary] = useState("");
+  const [age, setAge] = useState(radioAge[0]);
+  const [comment, setComment] = useState(radioComments[0]);
+  const [agreement, setAgreement] = useState(false);
 
   const changeBookName = (e: React.ChangeEvent<HTMLInputElement>) =>
     setBookName(e.currentTarget.value);
 
   const changeBookTags = (e: React.ChangeEvent<HTMLInputElement>) =>
     setBookTags(e.currentTarget.value);
+
+  const changeSummary = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setSummary(e.currentTarget.value);
+
+  const changeAge = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setAge(e.currentTarget.value);
+  const changeComment = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setComment(e.currentTarget.value);
+  const changeAgreement = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setAgreement(!agreement);
+
+  const handleSendBook = async () => {
+    try {
+      const result = await addBook(
+        bookName,
+        age,
+        bookTags,
+        summary,
+        comment,
+        agreement,
+      );
+      console.log(result);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <DefaultPageLayout>
@@ -38,9 +69,14 @@ export default function AddBook() {
               />
             </Form.Group>
             <p className="age">Ограничение по возрасту</p>
-            {ageOptions.map((option) => (
+            {radioAge.map((option) => (
               <div key={option} className="mb-2">
-                <Form.Check type="radio" label={option} name="radioGroup" />
+                <Form.Check
+                  type="radio"
+                  label={option}
+                  name="radioAge"
+                  onChange={changeAge}
+                />
               </div>
             ))}
             <Container className="inputText">
@@ -63,8 +99,8 @@ export default function AddBook() {
                 <Form.Label>Краткое содержание: </Form.Label>
                 <Form.Control
                   name="chapterName"
-                  value={bookTags}
-                  onChange={changeBookTags}
+                  value={summary}
+                  onChange={changeSummary}
                   type="text"
                   as="textarea"
                   rows={6}
@@ -72,18 +108,37 @@ export default function AddBook() {
                 />
               </Form.Group>
             </Container>
-            <p className="age">Запрет/разрешение комментариев</p>
-            {allowComment.map((option) => (
+            <p className="comments">Запрет/разрешение комментариев</p>
+            {radioComments.map((option) => (
               <div key={option} className="mb-2">
-                <Form.Check type="radio" label={option} name="radioGroup" />
+                <Form.Check
+                  type="radio"
+                  label={option}
+                  name="radioComments"
+                  onChange={changeComment}
+                />
               </div>
             ))}
-            <p>
-              Я подтверждаю, что являюсь автором публикуемого мной текста и
-              понимаю, что публикация чужих работ или публикация работ,
-              нарушающих правила, может привести к удалению этих работ и
-              блокировке к доступу на сайт
-            </p>
+            <Stack direction="horizontal" gap={3}>
+              <Form.Check
+                type="checkbox"
+                name="chackboxAgreement"
+                onChange={changeAgreement}
+                checked={agreement}
+                label="Я подтверждаю, что являюсь автором публикуемого мной текста и
+                понимаю, что публикация чужих работ или публикация работ,
+                нарушающих правила, может привести к удалению этих работ и
+                блокировке к доступу на сайт"
+              />
+            </Stack>
+
+            <Button
+              type="submit"
+              className="mb-2"
+              onClick={handleSendBook}
+              as="input"
+              value="Сохранить и перейти к публикации"
+            />
           </Container>
         </Form>
       </Container>

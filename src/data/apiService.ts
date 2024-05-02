@@ -7,7 +7,7 @@ import {
   saveUserId,
 } from "./storage";
 
-const API_URL = "http://5.tcp.eu.ngrok.io:18400/";
+const API_URL = "http://4.tcp.eu.ngrok.io:17345/";
 
 // #region user and auth flow
 export const register = async (
@@ -86,6 +86,37 @@ export const addChapter = async (
       name: chapterName,
       text: chapterText,
       comment: authorComment,
+    },
+    {
+      headers: getHeaders(),
+    },
+  );
+
+  console.log(response.data);
+
+  return response.data;
+};
+
+export const addBook = async (
+  title: string,
+  ageRestriction: string,
+  tags: string,
+  summary: string,
+  commentRestriction: string,
+  agreement: boolean
+) => {
+  const userId = getUserId();
+
+  const response = await axios.post(
+    API_URL + "books/",
+    {
+      userId: userId,
+      title: title,
+      tags: tags,
+      summary: summary,
+      commentRestriction:  commentRestriction,
+      ageRestriction: ageRestriction, 
+      agreement: agreement
     },
     {
       headers: getHeaders(),

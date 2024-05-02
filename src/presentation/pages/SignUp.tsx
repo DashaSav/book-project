@@ -44,7 +44,7 @@ function SignUp() {
         <img src={logo} className="App-logo" alt="logo" />
         <div className="header">
           <h2>Создайте аккаунт</h2>
-          <p>Начните ваше погружение!</p>
+          <p className="grey-text">Начните ваше погружение!</p>
         </div>
 
         {/*Ввод имени*/}
@@ -100,7 +100,7 @@ function SignUp() {
           </Stack>
         </Form>
 
-        <p className="footer">
+        <p className="grey-text">
           Уже есть аккаунт? <a href="/login">Войти</a>
         </p>
       </Stack>
