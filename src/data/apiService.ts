@@ -7,7 +7,7 @@ import {
   saveUserId,
 } from "./storage";
 
-const API_URL = "http://4.tcp.eu.ngrok.io:17345/";
+const API_URL = "http://localhost:8080/";
 
 // #region user and auth flow
 export const register = async (
@@ -55,7 +55,7 @@ export const deleteBook = async (id: string) => {
   const response = await axios.delete(API_URL + "books/" + id, {
     headers: getHeaders(),
   });
-}
+};
 
 export const getUser = async (id: string) => {
   const response = await axios.post(API_URL + "users/" + id);
@@ -103,25 +103,26 @@ export const addBook = async (
   tags: string,
   summary: string,
   commentRestriction: string,
-  agreement: boolean
+  agreement: boolean,
 ) => {
   const userId = getUserId();
+  if (userId === null) {
+    return;
+  }
 
-  const response = await axios.post(
-    API_URL + "books/",
-    {
-      userId: userId,
-      title: title,
-      tags: tags,
-      summary: summary,
-      commentRestriction:  commentRestriction,
-      ageRestriction: ageRestriction, 
-      agreement: agreement
-    },
-    {
-      headers: getHeaders(),
-    },
-  );
+  const newBook: BookCreate = {
+    userId: userId,
+    title: title,
+    tags: tags,
+    summary: summary,
+    commentRestriction: commentRestriction,
+    ageRestriction: ageRestriction,
+    agreement: agreement,
+  };
+
+  const response = await axios.post(API_URL + "books/", newBook, {
+    headers: getHeaders(),
+  });
 
   console.log(response.data);
 
@@ -136,13 +137,7 @@ export const getBook = async (id: string) => {
   const response = await axios.get(API_URL + "books/" + id);
 
   console.log(response.data);
-
-  const book: IBook = {
-    title: response.data["title"],
-    author: response.data["author"],
-    description: response.data["description"],
-  };
-  return book;
+  return response.data;
 };
 // #endregion
 

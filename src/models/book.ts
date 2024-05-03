@@ -1,8 +1,15 @@
 interface IBook {
-  author: string;
+  user: IUser;
+  userId: string;
   title: string;
-  description: string;
+  summary: string;
+  tags: string;
+  commentRestriction: string;
+  ageRestriction: string;
+  agreement: boolean;
 }
+
+type BookCreate = Omit<IBook, "user">;
 
 type DBBook = IBook & {
   _id: string;

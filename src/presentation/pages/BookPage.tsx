@@ -50,10 +50,10 @@ export default function BookPage() {
         </Container>
         <Container className="AboutBook">
           <p>
-            {book?.description ??
+            {book?.summary ??
               "Lorem ipsum dolor sit amet, vince adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
           </p>
-          <p>{book?.author ?? "Автор книги"}</p>
+          <p>{book?.user.name ?? "Автор книги"}</p>
           <p>Персонажи</p>
           <p>Возрастное ограничение</p>
           <p>Жанры</p>

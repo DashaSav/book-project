@@ -14,8 +14,8 @@ export default function Book({ book }: BookProps) {
         <Card.Img variant="top" src={logo} />
         <Card.Body>
           <Card.Title>{book.title}</Card.Title>
-          <Card.Text>{book.author}</Card.Text>
-          <Card.Text>{book.description}</Card.Text>
+          <Card.Text>{book.user.name}</Card.Text>
+          <Card.Text>{book.summary}</Card.Text>
           <Button variant="primary" onClick={handleReadClick}>
             Читать
           </Button>

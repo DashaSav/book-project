@@ -13,15 +13,15 @@ export default function AddBook() {
     "Запретить публикацию комментариев",
   ];
 
-  const [bookName, setBookName] = useState("");
+  const [title, setTitle] = useState("");
   const [bookTags, setBookTags] = useState("");
   const [summary, setSummary] = useState("");
   const [age, setAge] = useState(radioAge[0]);
   const [comment, setComment] = useState(radioComments[0]);
   const [agreement, setAgreement] = useState(false);
 
-  const changeBookName = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setBookName(e.currentTarget.value);
+  const changeTitle = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setTitle(e.currentTarget.value);
 
   const changeBookTags = (e: React.ChangeEvent<HTMLInputElement>) =>
     setBookTags(e.currentTarget.value);
@@ -39,7 +39,7 @@ export default function AddBook() {
   const handleSendBook = async () => {
     try {
       const result = await addBook(
-        bookName,
+        title,
         age,
         bookTags,
         summary,
@@ -61,9 +61,9 @@ export default function AddBook() {
             <Form.Group className="mb-2">
               <Form.Label>Название книги: </Form.Label>
               <Form.Control
-                name="chapterName"
-                value={bookName}
-                onChange={changeBookName}
+                name="bookName"
+                value={title}
+                onChange={changeTitle}
                 type="text"
                 placeholder="Введите название книги"
               />
@@ -83,7 +83,7 @@ export default function AddBook() {
               <Form.Group className="mb-2">
                 <Form.Label>Метки: </Form.Label>
                 <Form.Control
-                  name="booktags"
+                  name="tags"
                   value={bookTags}
                   onChange={changeBookTags}
                   type="text"
@@ -98,7 +98,7 @@ export default function AddBook() {
               <Form.Group className="mb-2">
                 <Form.Label>Краткое содержание: </Form.Label>
                 <Form.Control
-                  name="chapterName"
+                  name="bookName"
                   value={summary}
                   onChange={changeSummary}
                   type="text"
@@ -133,7 +133,7 @@ export default function AddBook() {
             </Stack>
 
             <Button
-              type="submit"
+              type="button"
               className="mb-2"
               onClick={handleSendBook}
               as="input"
