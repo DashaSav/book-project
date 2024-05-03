@@ -41,7 +41,7 @@ function StaticExample() {
 
         <Modal.Footer>
           <Button variant="secondary">Закрыть окно</Button>
-          <Button variant="primary">Отпраивть жалобу</Button>
+          <Button variant="primary">Отправить жалобу</Button>
         </Modal.Footer>
       </Modal.Dialog>
     </div>

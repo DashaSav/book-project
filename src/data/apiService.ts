@@ -7,7 +7,7 @@ import {
   saveUserId,
 } from "./storage";
 
-const API_URL = "http://localhost:8080/";
+const API_URL = "http://0.tcp.eu.ngrok.io:14827/";
 
 // #region user and auth flow
 export const register = async (
