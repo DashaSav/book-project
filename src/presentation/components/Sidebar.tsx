@@ -4,7 +4,7 @@ export default function Sidebar() {
   return (
     <>
       <Nav defaultActiveKey="/profile" className="flex-column sidebar">
-        <Nav.Link href="/profile">Мой профиль</Nav.Link>
+        <Nav.Link href="/my_profile">Мой профиль</Nav.Link>
         <Nav.Link href="/my_books">Мои книги</Nav.Link>
         <Nav.Link href="/addbook">Добавить книгу</Nav.Link>
         <Nav.Link href="/favorites">Избранное</Nav.Link>

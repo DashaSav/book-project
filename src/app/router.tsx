@@ -4,7 +4,7 @@ import BookPage from "../presentation/pages/BookPage";
 import Login from "../presentation/pages/Login";
 import MainPage from "../presentation/pages/MainPage";
 import NotFoundPage from "../presentation/pages/NotFoundPage";
-import Profile from "../presentation/pages/Profile";
+import MyProfile from "../presentation/pages/MyProfile";
 import SignUp from "../presentation/pages/SignUp";
 import AddChapter from "../presentation/pages/AddChapter";
 import MyComments from "../presentation/pages/MyComments";
@@ -34,8 +34,8 @@ const router = createBrowserRouter([
     element: <AddBook />,
   },
   {
-    path: "/profile",
-    element: <Profile />,
+    path: "/my_profile",
+    element: <MyProfile />,
   },
   {
     path: "/addchapter",

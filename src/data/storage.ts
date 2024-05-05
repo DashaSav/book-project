@@ -10,6 +10,10 @@ export function removeToken() {
   localStorage.removeItem("token");
 }
 
+export function removeUserId() {
+  localStorage.removeItem("user_id");
+}
+
 export function saveUserId(id: string) {
   localStorage.setItem("user_id", id);
 }

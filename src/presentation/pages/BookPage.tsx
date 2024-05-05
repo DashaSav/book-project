@@ -18,7 +18,7 @@ export default function BookPage() {
   const [userComment, setUserComment] = useState("");
 
   useEffect(() => {
-    if (id == undefined) return;
+    if (id === undefined) return;
 
     getBook(id)
       .then((fetched) => setBook(fetched))
@@ -27,13 +27,13 @@ export default function BookPage() {
     getCommentsByBook(id)
       .then((fetched) => setComments(fetched))
       .catch((e) => console.log(e));
-  }, []);
+  });
 
   const changeUserComment = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUserComment(e.currentTarget.value);
 
   const submitComment = () => {
-    if (id == undefined) return;
+    if (id === undefined) return;
 
     addComment(id, userComment);
   };

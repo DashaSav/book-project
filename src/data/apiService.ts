@@ -3,11 +3,12 @@ import {
   getToken,
   getUserId,
   removeToken,
+  removeUserId,
   saveToken,
   saveUserId,
 } from "./storage";
 
-const API_URL = "http://0.tcp.eu.ngrok.io:14827/";
+const API_URL = "http://7.tcp.eu.ngrok.io:16741/";
 
 // #region user and auth flow
 export const register = async (
@@ -51,25 +52,53 @@ export const login = async (email: string, password: string) => {
   };
 };
 
-export const deleteBook = async (id: string) => {
-  const response = await axios.delete(API_URL + "books/" + id, {
+export const getUser = async (id: string): Promise<IUser | null> => {
+  const response = await axios.get(API_URL + "users/" + id);
+
+  return response.data;
+};
+
+export const getCurrentUser = async () => {
+  const userId = getUserId();
+  if (userId === null) return null;
+
+  return await getUser(userId);
+};
+
+export const updateUser = async (email: string, name: string, password: string, passwordRepeat: string): Promise<IUser | null> => {
+  //guard - защита, если пользователь не ввел значение мы не будем отправлять запрос на обновление
+  const userId = getUserId();
+  if (userId === null) return null;
+  if (email === "") return null;
+  if(name === "") return null;
+
+  let updatedUser: UserUpdate = {email: email, name: name};
+  if(password !== "" && passwordRepeat === password){
+    updatedUser.password = password;
+  }
+  const response = await axios.put(API_URL + "users/" + userId, updatedUser, {
     headers: getHeaders(),
   });
+  return response.data;
 };
 
-export const getUser = async (id: string) => {
-  const response = await axios.post(API_URL + "users/" + id);
+export const deleteUser = async () => {
+  const userId = getUserId();
+  if (userId === null) return;
 
-  console.log(response.data);
+  const response = await axios.delete(API_URL + "users/" + userId, {
+    headers: getHeaders(),
+  });
 
-  const user: IUser = {
-    name: response.data["name"],
-    email: response.data["email"],
-  };
-  return user;
+  logout();
+
+  return response;
 };
 
-export const logout = () => removeToken();
+export const logout = () => {
+  removeToken();
+  removeUserId();
+};
 // #endregion
 
 // #region books and chapters
@@ -127,6 +156,12 @@ export const addBook = async (
   console.log(response.data);
 
   return response.data;
+};
+
+export const deleteBook = async (id: string) => {
+  const response = await axios.delete(API_URL + "books/" + id, {
+    headers: getHeaders(),
+  });
 };
 
 export async function getBooks(): Promise<DBBook[]> {

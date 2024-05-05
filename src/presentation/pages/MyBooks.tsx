@@ -12,7 +12,7 @@ export default function MyBooks() {
       .catch((e) => console.log(e));
   }, []);
   const handleBookDelete = (id: string) => {
-    const newBooks = books.filter((item) => item._id != id);
+    const newBooks = books.filter((item) => item._id !== id);
     setBooks(newBooks);
   };
 

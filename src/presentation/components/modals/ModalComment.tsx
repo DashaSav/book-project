@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
 
-function StaticExample() {
+function ModalComment() {
   const [complaintText, setComplaintText] = useState("");
 
   const changeComplaintText = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -48,4 +48,4 @@ function StaticExample() {
   );
 }
 
-export default StaticExample;
+export default ModalComment;

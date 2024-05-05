@@ -32,10 +32,10 @@ export default function AddChapter() {
   return (
     <DefaultPageLayout>
       <Container className="content">
-        <h2 className="header">Добавить новую часть</h2>
+        <h2 className="header">Добавить новую главу</h2>
         <Form>
           <Form.Group className="mb-2">
-            <Form.Label>Название части</Form.Label>
+            <Form.Label>Название главы</Form.Label>
             <Form.Control
               name="chapterName"
               value={chapterName}
@@ -54,7 +54,7 @@ export default function AddChapter() {
               type="text"
               as="textarea"
               rows={6}
-              placeholder="Здесь будет текст вашей книги"
+              placeholder="Здесь будет текст главы"
             />
           </Form.Group>
 
@@ -67,12 +67,12 @@ export default function AddChapter() {
               type="text"
               as="textarea"
               rows={3}
-              placeholder="Здесь будет ваш комментарий к книге"
+              placeholder="Здесь будет ваш комментарий к главе"
             />
           </Form.Group>
 
           <Button
-            type="submit"
+            type="button"
             className="mb-2"
             onClick={handleSendChapter}
             as="input"
