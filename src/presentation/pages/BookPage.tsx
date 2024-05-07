@@ -8,12 +8,19 @@ import Comment from "../components/Comment";
 import DefaultPageLayout from "./DefaultPage";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { addComment, getBook, getCommentsByBook } from "../../data/apiService";
+import {
+  addComment,
+  getBook,
+  getChapters,
+  getCommentsByBook,
+} from "../../data/apiService";
+import Chapter from "../components/Chapter";
 
 export default function BookPage() {
   const { id } = useParams();
 
   const [book, setBook] = useState<IBook>();
+  const [chapters, setChapters] = useState<DBChapter[]>([]);
   const [comments, setComments] = useState<IComment[]>([]);
   const [userComment, setUserComment] = useState("");
 
@@ -28,6 +35,20 @@ export default function BookPage() {
       .then((fetched) => setComments(fetched))
       .catch((e) => console.log(e));
   });
+
+  useEffect(() => {
+    getChapters()
+      .then((chapters) => setChapters(chapters))
+      .catch((e) => console.log(e));
+  }, []);
+  const handleChapterDelete = (id: string) => {
+    const newChapters = chapters.filter((item) => item._id !== id);
+    setChapters(newChapters);
+  };
+  const handleChapterEdit = (id: string) => {
+    const newChapters = chapters.filter((item) => item._id !== id);
+    setChapters(newChapters);
+  };
 
   const changeUserComment = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUserComment(e.currentTarget.value);
@@ -78,8 +99,12 @@ export default function BookPage() {
             value="Отправить"
             onClick={submitComment}
           />
-          <h2>Тут будет список комментариев</h2>
-
+          {/* Тут будет список комментариев*/}
+          <div className="flex-cont">
+            {chapters.map((chapter) => (
+              <Chapter chapter={chapter} />
+            ))}
+          </div>
           {comments.map((comment) => (
             <Comment comment={comment} />
           ))}

@@ -5,8 +5,10 @@ import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import { addChapter } from "../../data/apiService";
 import DefaultPageLayout from "./DefaultPage";
+import { useParams } from "react-router-dom";
 
 export default function AddChapter() {
+  const { bookId } = useParams();
   const [chapterName, setChapterName] = useState("");
   const [chapterText, setChapterText] = useState("");
   const [authorComment, setAuthorComment] = useState("");
@@ -22,7 +24,15 @@ export default function AddChapter() {
 
   const handleSendChapter = async () => {
     try {
-      const result = await addChapter(chapterName, chapterText, authorComment);
+      if (bookId === undefined) {
+        return;
+      }
+      const result = await addChapter(
+        bookId,
+        chapterName,
+        chapterText,
+        authorComment,
+      );
       console.log(result);
     } catch (e) {
       console.log(e);

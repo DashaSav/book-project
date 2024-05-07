@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import AddBook from "../presentation/pages/AddBook";
-import BookPage from "../presentation/pages/BookPage";
 import Login from "../presentation/pages/Login";
 import MainPage from "../presentation/pages/MainPage";
 import NotFoundPage from "../presentation/pages/NotFoundPage";
@@ -10,6 +9,7 @@ import AddChapter from "../presentation/pages/AddChapter";
 import MyComments from "../presentation/pages/MyComments";
 import MyBooks from "../presentation/pages/MyBooks";
 import Favorites from "../presentation/pages/Favorites";
+import BookPage from "../presentation/pages/BookPage";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     element: <BookPage />,
   },
   {
-    path: "/addbook",
+    path: "/add_book",
     element: <AddBook />,
   },
   {
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
     element: <MyProfile />,
   },
   {
-    path: "/addchapter",
+    path: "/add_chapter/:bookId",
     element: <AddChapter />,
   },
   {

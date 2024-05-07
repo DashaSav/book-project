@@ -8,7 +8,7 @@ import {
   saveUserId,
 } from "./storage";
 
-const API_URL = "http://7.tcp.eu.ngrok.io:16741/";
+const API_URL = "http://localhost:8080/";
 
 // #region user and auth flow
 export const register = async (
@@ -25,6 +25,7 @@ export const register = async (
   if (response.status >= 200 && response.status < 300 && response.data.token) {
     saveToken(response.data.token["access_token"]);
   }
+  saveUserId(response.data.user["_id"]);
 
   return {
     status: response.status,
@@ -103,18 +104,22 @@ export const logout = () => {
 
 // #region books and chapters
 export const addChapter = async (
-  chapterName: string,
-  chapterText: string,
-  authorComment: string,
+  bookId: string,
+  title: string,
+  text: string,
+  comment: string,
 ) => {
-  const userId = getUserId();
+  if(bookId === null){
+    return;
+  }
 
   const response = await axios.post(
     API_URL + "chapters/",
     {
-      name: chapterName,
-      text: chapterText,
-      comment: authorComment,
+      bookId: bookId,
+      title: title,
+      text: text,
+      comment: comment,
     },
     {
       headers: getHeaders(),
@@ -123,6 +128,23 @@ export const addChapter = async (
 
   console.log(response.data);
 
+  return response.data;
+};
+
+export const deleteChapter = async (id: string) => {
+  const response = await axios.delete(API_URL + "chapters/" + id, {
+    headers: getHeaders(),
+  });
+};
+
+export async function getChapters(): Promise<DBChapter[]> {
+  return (await axios.get(API_URL + "chapters/")).data;
+}
+
+export const getChapter = async (id: string) => {
+  const response = await axios.get(API_URL + "chapters/" + id);
+
+  console.log(response.data);
   return response.data;
 };
 
