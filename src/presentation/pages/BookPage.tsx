@@ -34,7 +34,7 @@ export default function BookPage() {
     getCommentsByBook(id)
       .then((fetched) => setComments(fetched))
       .catch((e) => console.log(e));
-  });
+  }, []);
 
   useEffect(() => {
     getChapters()
@@ -65,22 +65,30 @@ export default function BookPage() {
         <h2>{book?.title ?? "Название книги"}</h2>
         <Container>
           <img src={logo} className="book-cover" alt="logo" />
-          <StarRating initialValue={3}></StarRating>
+          <StarRating initialValue={0}></StarRating>
           <h2>Содержание</h2>
-          <h5>Тут как то сделать список глав с ссылками</h5>
+          <p>Главы:</p>
+          {/* Тут будет список глав*/}
+          <div className="flex-cont">
+            {chapters.map((chapter) => (
+              <Chapter chapter={chapter} />
+            ))}
+          </div>
         </Container>
         <Container className="AboutBook">
           <p>
-            {book?.summary ??
-              "Lorem ipsum dolor sit amet, vince adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+            Содержание книги: {book?.summary ?? "Тут должно быть содержание"}
           </p>
-          <p>{book?.user.name ?? "Автор книги"}</p>
-          <p>Персонажи</p>
-          <p>Возрастное ограничение</p>
-          <p>Жанры</p>
-          <p>Статус</p>
-          <p>Дата публикации</p>
-          <p>Метки</p>
+          <p>Автор книги: {book?.user.name ?? "Не указан"}</p>
+          <p>Метки: {book?.tags ?? "Не указан"}</p>
+          <p>Возрастное ограничение: {book?.ageRestriction ?? "Не указано"}</p>
+          <p>Жанры: </p>
+          <p>Статус: </p>
+          <p>Дата публикации: </p>
+          <p>
+            Комментарий автора к книге:{" "}
+            {book?.commentRestriction ?? "Не указан"}
+          </p>
         </Container>
         <Container className="Comments">
           <h2>Комментарии</h2>
@@ -100,11 +108,6 @@ export default function BookPage() {
             onClick={submitComment}
           />
           {/* Тут будет список комментариев*/}
-          <div className="flex-cont">
-            {chapters.map((chapter) => (
-              <Chapter chapter={chapter} />
-            ))}
-          </div>
           {comments.map((comment) => (
             <Comment comment={comment} />
           ))}

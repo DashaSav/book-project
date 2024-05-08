@@ -9,13 +9,13 @@ import { useNavigate } from "react-router-dom";
 interface ChapterProps {
   chapter: DBChapter;
 }
-const navigate = useNavigate();
-const [showDeleteChapterModal, setShowDeleteChapterModal] = useState(false);
 
 const Chapter = ({ chapter }: ChapterProps) => {
+  const navigate = useNavigate();
+  const [showDeleteChapterModal, setShowDeleteChapterModal] = useState(false);
   const handleEditClick = () => {
-    //тут попробовать сделать переход на конкретную главу в текстовом редакторе
-    const handleEditChapter = () => navigate("/chapter/edit/" + chapter._id);
+    //тут переход на конкретную главу в текстовом редакторе
+    navigate("/chapter/edit/" + chapter._id);
   };
 
   const handleDeleteClick = async () => {

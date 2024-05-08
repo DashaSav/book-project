@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Comment from "../components/Comment";
+import Comment from "../components/MyComment";
 import DefaultPageLayout from "./DefaultPage";
 import { Stack } from "react-bootstrap";
 import { getCommentsByUser } from "../../data/apiService";
