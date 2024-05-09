@@ -154,6 +154,6 @@ input[type="checkbox"] {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
-  row-gap: 2em;
+  justify-content: flex-start;
+  gap: 2em;
 }

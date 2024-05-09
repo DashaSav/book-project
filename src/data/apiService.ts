@@ -66,15 +66,20 @@ export const getCurrentUser = async () => {
   return await getUser(userId);
 };
 
-export const updateUser = async (email: string, name: string, password: string, passwordRepeat: string): Promise<IUser | null> => {
+export const updateUser = async (
+  email: string,
+  name: string,
+  password: string,
+  passwordRepeat: string,
+): Promise<IUser | null> => {
   //guard - защита, если пользователь не ввел значение мы не будем отправлять запрос на обновление
   const userId = getUserId();
   if (userId === null) return null;
   if (email === "") return null;
-  if(name === "") return null;
+  if (name === "") return null;
 
-  let updatedUser: UserUpdate = {email: email, name: name};
-  if(password !== "" && passwordRepeat === password){
+  let updatedUser: UserUpdate = { email: email, name: name };
+  if (password !== "" && passwordRepeat === password) {
     updatedUser.password = password;
   }
   const response = await axios.put(API_URL + "users/" + userId, updatedUser, {
@@ -109,7 +114,7 @@ export const addChapter = async (
   text: string,
   comment: string,
 ) => {
-  if(bookId === null){
+  if (bookId === null) {
     return;
   }
 
@@ -137,8 +142,8 @@ export const deleteChapter = async (id: string) => {
   });
 };
 
-export async function getChapters(): Promise<DBChapter[]> {
-  return (await axios.get(API_URL + "chapters/")).data;
+export async function getChapters(bookId: string): Promise<DBChapter[]> {
+  return (await axios.get(API_URL + "chapters/findByBook/" + bookId)).data;
 }
 
 export const getChapter = async (id: string) => {

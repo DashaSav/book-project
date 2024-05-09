@@ -13,6 +13,7 @@ interface ChapterProps {
 const Chapter = ({ chapter }: ChapterProps) => {
   const navigate = useNavigate();
   const [showDeleteChapterModal, setShowDeleteChapterModal] = useState(false);
+
   const handleEditClick = () => {
     //тут переход на конкретную главу в текстовом редакторе
     navigate("/chapter/edit/" + chapter._id);

@@ -34,13 +34,12 @@ export default function BookPage() {
     getCommentsByBook(id)
       .then((fetched) => setComments(fetched))
       .catch((e) => console.log(e));
-  }, []);
 
-  useEffect(() => {
-    getChapters()
+    getChapters(id)
       .then((chapters) => setChapters(chapters))
       .catch((e) => console.log(e));
   }, []);
+
   const handleChapterDelete = (id: string) => {
     const newChapters = chapters.filter((item) => item._id !== id);
     setChapters(newChapters);

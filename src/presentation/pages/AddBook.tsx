@@ -29,10 +29,6 @@ export default function AddBook() {
   const changeSummary = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSummary(e.currentTarget.value);
 
-  const changeAge = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setAge(e.currentTarget.value);
-  const changeComment = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setComment(e.currentTarget.value);
   const changeAgreement = (e: React.ChangeEvent<HTMLInputElement>) =>
     setAgreement(!agreement);
 
@@ -75,7 +71,7 @@ export default function AddBook() {
                   type="radio"
                   label={option}
                   name="radioAge"
-                  onChange={changeAge}
+                  onChange={() => setAge(option)}
                 />
               </div>
             ))}
@@ -115,7 +111,7 @@ export default function AddBook() {
                   type="radio"
                   label={option}
                   name="radioComments"
-                  onChange={changeComment}
+                  onChange={() => setComment(option)}
                 />
               </div>
             ))}
