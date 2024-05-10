@@ -7,6 +7,7 @@ import DefaultPageLayout from "./DefaultPage";
 import { deleteUser, getCurrentUser, updateUser } from "../../data/apiService";
 import ModalDeleteProfile from "../components/modals/ModalDeleteProfile";
 import { useNavigate } from "react-router-dom";
+import Routes from "../../app/routes";
 
 export default function MyProfile() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function MyProfile() {
     try {
       await deleteUser();
       setShowDeleteProfileModal(false);
-      navigate("/");
+      navigate(Routes.mainPage);
     } catch (e) {
       console.log(e);
     }

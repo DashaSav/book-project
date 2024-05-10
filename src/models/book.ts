@@ -10,6 +10,7 @@ interface IBook {
 }
 
 type BookCreate = Omit<IBook, "user">;
+type BookUpdate = Omit<BookCreate, "agreement">;
 
 type DBBook = IBook & {
   _id: string;

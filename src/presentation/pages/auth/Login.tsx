@@ -1,9 +1,9 @@
 import { Button, Stack } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import "../styles/App.scss";
-import logo from "../../assets/logoOwlBook.png";
+import "../../styles/App.scss";
+import logo from "../../../assets/logoOwlBook.png";
 import { useState } from "react";
-import { login } from "../../data/apiService";
+import { login } from "../../../data/apiService";
 import { useNavigate } from "react-router-dom";
 
 function Login() {

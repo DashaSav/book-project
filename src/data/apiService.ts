@@ -8,9 +8,9 @@ import {
   saveUserId,
 } from "./storage";
 
-const API_URL = "http://4.tcp.eu.ngrok.io:13062/";
+const API_URL = "http://localhost:8080/";
 
-// #region user and auth flow
+// region user and auth flow
 export const register = async (
   name: string,
   email: string,
@@ -105,9 +105,9 @@ export const logout = () => {
   removeToken();
   removeUserId();
 };
-// #endregion
+// endregion
 
-// #region books and chapters
+// region books and chapters
 export const addChapter = async (
   bookId: string,
   title: string,
@@ -131,13 +131,34 @@ export const addChapter = async (
     },
   );
 
-  console.log(response.data);
+  return response.data;
+};
+
+export const updateChapter = async (
+  id: string,
+  bookId: string,
+  title: string,
+  text: string,
+  comment: string,
+): Promise<DBChapter> => {
+  const response = await axios.put(
+    API_URL + "chapters/" + id,
+    {
+      bookId: bookId,
+      title: title,
+      text: text,
+      comment: comment,
+    },
+    {
+      headers: getHeaders(),
+    },
+  );
 
   return response.data;
 };
 
 export const deleteChapter = async (id: string) => {
-  const response = await axios.delete(API_URL + "chapters/" + id, {
+  await axios.delete(API_URL + "chapters/" + id, {
     headers: getHeaders(),
   });
 };
@@ -146,10 +167,9 @@ export async function getChapters(bookId: string): Promise<DBChapter[]> {
   return (await axios.get(API_URL + "chapters/findByBook/" + bookId)).data;
 }
 
-export const getChapter = async (id: string) => {
+export const getChapter = async (id: string): Promise<DBChapter> => {
   const response = await axios.get(API_URL + "chapters/" + id);
 
-  console.log(response.data);
   return response.data;
 };
 
@@ -162,9 +182,8 @@ export const addBook = async (
   agreement: boolean,
 ) => {
   const userId = getUserId();
-  if (userId === null) {
-    return;
-  }
+
+  if (userId === null) return;
 
   const newBook: BookCreate = {
     userId: userId,
@@ -180,13 +199,39 @@ export const addBook = async (
     headers: getHeaders(),
   });
 
-  console.log(response.data);
+  return response.data;
+};
+
+export const updateBook = async (
+  id: string,
+  title: string,
+  ageRestriction: string,
+  tags: string,
+  summary: string,
+  commentRestriction: string,
+): Promise<DBBook | undefined> => {
+  const userId = getUserId();
+
+  if (userId === null) return;
+
+  const updatedBook: BookUpdate = {
+    userId: userId,
+    title: title,
+    tags: tags,
+    summary: summary,
+    commentRestriction: commentRestriction,
+    ageRestriction: ageRestriction,
+  };
+
+  const response = await axios.put(API_URL + "books/" + id, updatedBook, {
+    headers: getHeaders(),
+  });
 
   return response.data;
 };
 
 export const deleteBook = async (id: string) => {
-  const response = await axios.delete(API_URL + "books/" + id, {
+  await axios.delete(API_URL + "books/" + id, {
     headers: getHeaders(),
   });
 };
@@ -195,15 +240,21 @@ export async function getBooks(): Promise<DBBook[]> {
   return (await axios.get(API_URL + "books/")).data;
 }
 
+export async function getUserBooks(): Promise<DBBook[]> {
+  const userId = getUserId();
+  if (userId === null) return [];
+
+  return (await axios.get(API_URL + "books/findByUser/" + userId)).data;
+}
+
 export const getBook = async (id: string) => {
   const response = await axios.get(API_URL + "books/" + id);
 
-  console.log(response.data);
   return response.data;
 };
-// #endregion
+// endregion
 
-// #region comments
+// region comments
 export async function getCommentsByBook(bookId: string): Promise<IComment[]> {
   return (await axios.get(API_URL + "comments/findByBook/" + bookId)).data;
 }
@@ -217,26 +268,44 @@ export const addComment = async (bookId: string, content: string) => {
   const userId = getUserId()!;
 
   const comment: CommentCreate = {
-    user_id: userId,
-    book_id: bookId,
+    userId: userId,
+    bookId: bookId,
     content: content,
+    likes: 0,
   };
 
   const response = await axios.post(API_URL + "comments/", comment, {
     headers: getHeaders(),
   });
 
-  console.log(response.data);
-
   return response.data;
 };
-// #endregion
+// endregion
 
-// #region favorites
+// region favorites
 export async function getFavorites(): Promise<DBBook[]> {
   return (await axios.get(API_URL + "books/")).data;
 }
-// #endregion
+// endregion
+
+// region reports
+export async function sendReport(
+  reportedUserId: string,
+  reportText: string,
+): Promise<DBReport> {
+  const userId = getUserId()!;
+
+  const report: IReport = {
+    userId: userId,
+    reportedUserId: reportedUserId,
+    report: reportText,
+  };
+
+  return (
+    await axios.post(API_URL + "reports/", report, { headers: getHeaders() })
+  ).data;
+}
+// endregion
 
 function getHeaders() {
   return {

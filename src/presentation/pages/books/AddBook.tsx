@@ -1,15 +1,14 @@
 import { Button, Form, Stack } from "react-bootstrap";
-import "../styles/App.scss";
+import "../../styles/App.scss";
 import Container from "react-bootstrap/Container";
-import DefaultPageLayout from "./DefaultPage";
+import DefaultPageLayout from "../DefaultPage";
 import { useState } from "react";
-import { addBook } from "../../data/apiService";
+import { addBook } from "../../../data/apiService";
 
 export default function AddBook() {
   const radioAge = ["6+", "12+", "16+", "18+"];
   const radioComments = [
-    "Разрешить публикацию комментариев всем пользователям",
-    "Разрешить публикацию комментариев только зарегистрированным пользователям",
+    "Разрешить публикацию комментариев",
     "Запретить публикацию комментариев",
   ];
 
@@ -118,7 +117,7 @@ export default function AddBook() {
             <Stack direction="horizontal" gap={3}>
               <Form.Check
                 type="checkbox"
-                name="chackboxAgreement"
+                name="checkboxAgreement"
                 onChange={changeAgreement}
                 checked={agreement}
                 label="Я подтверждаю, что являюсь автором публикуемого мной текста и

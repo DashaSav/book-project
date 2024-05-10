@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import Routes from "../../app/routes";
+
 export default function NotFoundPage() {
   return (
     <div className="flex flex-col gap-4">
-      404 Not Found
-      <Link to="/">Login</Link>
+      <p> 404 Not Found </p>
+      <Link to={Routes.mainPage}>Главная страница</Link>
     </div>
   );
 }

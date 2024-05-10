@@ -1,11 +1,11 @@
 import { Button, Stack } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import "../styles/App.scss";
+import "../../styles/App.scss";
 import Container from "react-bootstrap/Container";
-import logo from "../../assets/logoOwlBook.png";
-import StarRating from "../components/StarRating";
-import Comment from "../components/Comment";
-import DefaultPageLayout from "./DefaultPage";
+import logo from "../../../assets/logoOwlBook.png";
+import StarRating from "../../components/StarRating";
+import Comment from "../../components/Comment";
+import DefaultPageLayout from "../DefaultPage";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
@@ -13,8 +13,8 @@ import {
   getBook,
   getChapters,
   getCommentsByBook,
-} from "../../data/apiService";
-import Chapter from "../components/Chapter";
+} from "../../../data/apiService";
+import Chapter from "../../components/Chapter";
 
 export default function BookPage() {
   const { id } = useParams();
@@ -40,15 +40,6 @@ export default function BookPage() {
       .catch((e) => console.log(e));
   }, []);
 
-  const handleChapterDelete = (id: string) => {
-    const newChapters = chapters.filter((item) => item._id !== id);
-    setChapters(newChapters);
-  };
-  const handleChapterEdit = (id: string) => {
-    const newChapters = chapters.filter((item) => item._id !== id);
-    setChapters(newChapters);
-  };
-
   const changeUserComment = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUserComment(e.currentTarget.value);
 
@@ -69,8 +60,9 @@ export default function BookPage() {
           <p>Главы:</p>
           {/* Тут будет список глав*/}
           <Stack direction="vertical">
-            {chapters.map((chapter) => (
-              <Chapter chapter={chapter} key={chapter._id} />
+            {/* для нумерации глав используем индекс i */}
+            {chapters.map((chapter, i) => (
+              <Chapter chapter={chapter} key={chapter._id} index={i + 1} />
             ))}
           </Stack>
         </Container>

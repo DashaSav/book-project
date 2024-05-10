@@ -1,14 +1,17 @@
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import "../styles/App.scss";
+import "../../styles/App.scss";
 import { useState } from "react";
 import Container from "react-bootstrap/Container";
-import { addChapter } from "../../data/apiService";
-import DefaultPageLayout from "./DefaultPage";
-import { useParams } from "react-router-dom";
+import { addChapter } from "../../../data/apiService";
+import DefaultPageLayout from "../DefaultPage";
+import { useNavigate, useParams } from "react-router-dom";
+import Routes, { prepareUrl } from "../../../app/routes";
 
 export default function AddChapter() {
   const { bookId } = useParams();
+  const navigate = useNavigate();
+
   const [chapterName, setChapterName] = useState("");
   const [chapterText, setChapterText] = useState("");
   const [authorComment, setAuthorComment] = useState("");
@@ -24,9 +27,8 @@ export default function AddChapter() {
 
   const handleSendChapter = async () => {
     try {
-      if (bookId === undefined) {
-        return;
-      }
+      if (bookId === undefined) return;
+
       const result = await addChapter(
         bookId,
         chapterName,
@@ -34,6 +36,7 @@ export default function AddChapter() {
         authorComment,
       );
       console.log(result);
+      navigate(prepareUrl(Routes.bookChaptersEdit, { id: bookId }));
     } catch (e) {
       console.log(e);
     }

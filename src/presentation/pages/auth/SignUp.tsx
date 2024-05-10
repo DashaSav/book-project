@@ -1,10 +1,11 @@
 import { Button, FormGroup, Stack } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import "../styles/App.scss";
-import logo from "../../assets/logoOwlBook.png";
+import "../../styles/App.scss";
+import logo from "../../../assets/logoOwlBook.png";
 import { useState } from "react";
-import { register } from "../../data/apiService";
+import { register } from "../../../data/apiService";
 import { useNavigate } from "react-router-dom";
+import Routes from "../../../app/routes";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ function SignUp() {
       const result = await register(name, email, password);
 
       if (result.status >= 200 && result.status < 300) {
-        navigate("/");
+        navigate(Routes.mainPage);
       }
     } catch (e) {
       console.log(e);

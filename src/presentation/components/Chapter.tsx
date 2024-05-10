@@ -1,14 +1,18 @@
+import Routes, { prepareUrl } from "../../app/routes";
 import "../styles/App.scss";
 
 interface ChapterProps {
   chapter: DBChapter;
+  index: number;
 }
 
-export const Chapter = ({ chapter }: ChapterProps) => {
+export const Chapter = ({ chapter, index }: ChapterProps) => {
   return (
     <div>
       {/* //тут переход на конкретную главу для чтения */}
-      <a href={"/chapter/read/" + chapter._id}> {chapter.title} </a>
+      <a href={prepareUrl(Routes.chapterRead, { chapterId: chapter._id })}>
+        {`${index}. ${chapter.title}`}
+      </a>
     </div>
   );
 };

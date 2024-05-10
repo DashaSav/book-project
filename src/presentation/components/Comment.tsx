@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, Button, Badge } from "react-bootstrap";
 import "../styles/App.scss";
 import ModalReportComment from "./modals/ModalReportComment";
+import { sendReport } from "../../data/apiService";
 
 interface CommentProps {
   comment: IComment;
@@ -9,16 +10,17 @@ interface CommentProps {
 
 const Comment = ({ comment }: CommentProps) => {
   const [likeCount, setLikeCount] = useState(comment.likes);
+  const [showModal, setShowModal] = useState(false);
 
   const handleLikeClick = () => {
     setLikeCount(likeCount + 1);
   };
-  const handleReportCommentClick = async () => {
+
+  const handleReportClick = async (text: string) => {
     try {
       //тут всплывающая модалка с подтверждением что пользователь хочет удалить книгу
-      await reportComment(user._id);
-      setShowReportCommentModal(false);
-      navigate("/");
+      await sendReport(comment.userId, text);
+      setShowModal(false);
     } catch (e) {
       console.log(e);
     }
@@ -32,14 +34,15 @@ const Comment = ({ comment }: CommentProps) => {
         <Button variant="primary" onClick={handleLikeClick}>
           Лайк <Badge>{likeCount}</Badge>
         </Button>{" "}
-        <Button onClick={setShowReportCommentModal(true)} variant="danger">
+        <Button onClick={() => setShowModal(true)} variant="danger">
           Пожаловаться
         </Button>
       </Card.Body>
+
       <ModalReportComment
-        show={showReportCommentModal}
-        onHide={() => setShowReportCommentModal(false)}
-        onReport={reportComment}
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        onReport={handleReportClick}
       />
     </Card>
   );

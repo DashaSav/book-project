@@ -1,11 +1,9 @@
 interface IComment {
   user: IUser;
+  userId: string;
+  bookId: string;
   content: string;
   likes: number;
 }
 
-interface CommentCreate {
-  user_id: string;
-  book_id: string;
-  content: string;
-}
+type CommentCreate = Omit<IComment, "user">;

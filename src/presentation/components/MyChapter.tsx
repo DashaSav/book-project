@@ -5,18 +5,20 @@ import { Card } from "react-bootstrap";
 import { deleteChapter } from "../../data/apiService";
 import ModalDeleteChapter from "./modals/ModalDeleteChapter";
 import { useNavigate } from "react-router-dom";
+import Routes, { prepareUrl } from "../../app/routes";
 
 interface ChapterProps {
   chapter: DBChapter;
+  index: number;
 }
 
-const MyChapter = ({ chapter }: ChapterProps) => {
+const MyChapter = ({ chapter, index }: ChapterProps) => {
   const navigate = useNavigate();
   const [showDeleteChapterModal, setShowDeleteChapterModal] = useState(false);
 
   const handleEditClick = () => {
     //тут переход на конкретную главу в текстовом редакторе
-    navigate("/chapter/edit/" + chapter._id);
+    navigate(prepareUrl(Routes.chapterEdit, { chapterId: chapter._id }));
   };
 
   const handleDeleteClick = async () => {
@@ -24,7 +26,7 @@ const MyChapter = ({ chapter }: ChapterProps) => {
       //тут всплывающая модалка с подтверждением что пользователь хочет удалить главу из книги
       await deleteChapter(chapter._id);
       setShowDeleteChapterModal(false);
-      navigate("/");
+      navigate(prepareUrl(Routes.bookEdit, { id: chapter.bookId }));
     } catch (e) {
       console.log(e);
     }
@@ -37,7 +39,7 @@ const MyChapter = ({ chapter }: ChapterProps) => {
           onClick={() => setShowDeleteChapterModal(true)}
         ></BsTrashFill>
         <BsPencilSquare onClick={() => handleEditClick()} />
-        //номер главы от 1 до n //название главы
+        {`${index}. ${chapter.title}`}
       </Card.Body>
 
       <ModalDeleteChapter

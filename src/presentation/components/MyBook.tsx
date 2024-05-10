@@ -1,28 +1,30 @@
-import { Card, Button, Container } from "react-bootstrap";
+import { Card, Button, Container, Stack } from "react-bootstrap";
 import logo from "../../assets/logoOwlBook.png";
 import { useNavigate } from "react-router-dom";
 import { deleteBook } from "../../data/apiService";
 import { useState } from "react";
 import ModalDeleteBook from "./modals/ModalDeleteBook";
+import Routes, { prepareUrl } from "../../app/routes";
 
 type BookProps = { book: DBBook; onDelete: () => void };
 
 export default function MyBook({ book, onDelete }: BookProps) {
   const navigate = useNavigate();
+
   const [showDeleteBookModal, setShowDeleteBookModal] = useState(false);
-  const handleEditBook = () => navigate("/bookpage/edit/" + book._id);
 
-  const handleDeleteBook = async () => {
-    await deleteBook(book._id);
+  const handleEditBook = () =>
+    navigate(prepareUrl(Routes.bookEdit, { id: book._id }));
 
-    onDelete();
-  };
+  const handleChangeChapters = () =>
+    navigate(prepareUrl(Routes.bookChaptersEdit, { id: book._id }));
+
   const handleDeleteClick = async () => {
     try {
       //тут всплывающая модалка с подтверждением что пользователь хочет удалить книгу
       await deleteBook(book._id);
       setShowDeleteBookModal(false);
-      navigate("/");
+      onDelete();
     } catch (e) {
       console.log(e);
     }
@@ -36,25 +38,30 @@ export default function MyBook({ book, onDelete }: BookProps) {
           <Card.Title>{book.title}</Card.Title>
           <Card.Text>{book.user.name}</Card.Text>
           <Card.Text>{book.summary}</Card.Text>
+          <Stack gap={2}>
+            <Stack direction="horizontal" gap={2}>
+              <Button variant="primary" onClick={handleEditBook}>
+                Редактировать
+              </Button>
+              <Button
+                variant="danger"
+                onClick={() => setShowDeleteBookModal(true)}
+              >
+                Удалить
+              </Button>
+            </Stack>
+            <Button variant="primary" onClick={handleChangeChapters}>
+              Добавить/изменить главы
+            </Button>
+          </Stack>
         </Card.Body>
-        <Container className="buttons-inline">
-          <Button className="edit" variant="primary" onClick={handleEditBook}>
-            Редактировать
-          </Button>
-          <Button
-            className="delete"
-            variant="danger"
-            onClick={() => setShowDeleteBookModal(true)}
-          >
-            Удалить
-          </Button>
-        </Container>
-        <ModalDeleteBook
-          show={showDeleteBookModal}
-          onHide={() => setShowDeleteBookModal(false)}
-          onDelete={handleDeleteClick}
-        />
       </Card>
+
+      <ModalDeleteBook
+        show={showDeleteBookModal}
+        onHide={() => setShowDeleteBookModal(false)}
+        onDelete={handleDeleteClick}
+      />
     </>
   );
 }

@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { getBooks } from "../../data/apiService";
-import DefaultPageLayout from "./DefaultPage";
-import MyBook from "../components/MyBook";
+import { getUserBooks } from "../../../data/apiService";
+import DefaultPageLayout from "../DefaultPage";
+import MyBook from "../../components/MyBook";
 
 export default function MyBooks() {
   const [books, setBooks] = useState<DBBook[]>([]);
 
   useEffect(() => {
-    getBooks()
+    getUserBooks()
       .then((books) => setBooks(books))
       .catch((e) => console.log(e));
   }, []);
+
   const handleBookDelete = (id: string) => {
     const newBooks = books.filter((item) => item._id !== id);
     setBooks(newBooks);

@@ -1,57 +1,73 @@
 import { createBrowserRouter } from "react-router-dom";
-import AddBook from "../presentation/pages/AddBook";
-import Login from "../presentation/pages/Login";
+import AddBook from "../presentation/pages/books/AddBook";
+import Login from "../presentation/pages/auth/Login";
 import MainPage from "../presentation/pages/MainPage";
 import NotFoundPage from "../presentation/pages/NotFoundPage";
 import MyProfile from "../presentation/pages/MyProfile";
-import SignUp from "../presentation/pages/SignUp";
-import AddChapter from "../presentation/pages/AddChapter";
+import SignUp from "../presentation/pages/auth/SignUp";
+import AddChapter from "../presentation/pages/chapters/AddChapter";
 import MyComments from "../presentation/pages/MyComments";
-import MyBooks from "../presentation/pages/MyBooks";
+import MyBooks from "../presentation/pages/books/MyBooks";
 import Favorites from "../presentation/pages/Favorites";
-import BookPage from "../presentation/pages/BookPage";
+import BookPage from "../presentation/pages/books/BookPage";
+import Routes from "./routes";
+import EditBook from "../presentation/pages/books/EditBook";
+import EditBookChapters from "../presentation/pages/chapters/EditBookChapters";
+import EditChapter from "../presentation/pages/chapters/EditChapter";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: Routes.mainPage,
     element: <MainPage />,
     errorElement: <NotFoundPage />,
   },
   {
-    path: "/login",
+    path: Routes.login,
     element: <Login />,
   },
   {
-    path: "/signup",
+    path: Routes.signup,
     element: <SignUp />,
   },
   {
-    path: "/bookpage/:id",
+    path: Routes.bookpage,
     element: <BookPage />,
   },
   {
-    path: "/add_book",
+    path: Routes.bookAdd,
     element: <AddBook />,
   },
   {
-    path: "/my_profile",
+    path: Routes.bookEdit,
+    element: <EditBook />,
+  },
+  {
+    path: Routes.myProfile,
     element: <MyProfile />,
   },
   {
-    path: "/add_chapter/:bookId",
+    path: Routes.chapterAdd,
     element: <AddChapter />,
   },
   {
-    path: "/my_comments",
+    path: Routes.chapterEdit,
+    element: <EditChapter />,
+  },
+  {
+    path: Routes.myComments,
     element: <MyComments />,
   },
   {
-    path: "/my_books",
+    path: Routes.myBooks,
     element: <MyBooks />,
   },
   {
-    path: "/favorites",
+    path: Routes.favorites,
     element: <Favorites />,
+  },
+  {
+    path: Routes.bookChaptersEdit,
+    element: <EditBookChapters />,
   },
 ]);
 

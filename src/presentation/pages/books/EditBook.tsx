@@ -1,58 +1,70 @@
 import { Button, Form, Stack } from "react-bootstrap";
-import "../styles/App.scss";
+import "../../styles/App.scss";
 import Container from "react-bootstrap/Container";
-import DefaultPageLayout from "./DefaultPage";
-import { useState } from "react";
-import { addBook } from "../../data/apiService";
+import DefaultPageLayout from "../DefaultPage";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getBook, updateBook } from "../../../data/apiService";
 
 export default function EditBook() {
+  const { id } = useParams();
   const radioAge = ["6+", "12+", "16+", "18+"];
   const radioComments = [
-    "Разрешить публикацию комментариев всем пользователям",
-    "Разрешить публикацию комментариев только зарегистрированным пользователям",
+    "Разрешить публикацию комментариев",
     "Запретить публикацию комментариев",
   ];
 
   const [title, setTitle] = useState("");
-  const [bookTags, setBookTags] = useState("");
+  const [tags, setTags] = useState("");
   const [summary, setSummary] = useState("");
+
   const [age, setAge] = useState(radioAge[0]);
+
   const [comment, setComment] = useState(radioComments[0]);
   const [agreement, setAgreement] = useState(false);
 
   const changeTitle = (e: React.ChangeEvent<HTMLInputElement>) =>
     setTitle(e.currentTarget.value);
 
-  const changeBookTags = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setBookTags(e.currentTarget.value);
+  const changeTags = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setTags(e.currentTarget.value);
 
   const changeSummary = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSummary(e.currentTarget.value);
 
-  const changeAgreement = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setAgreement(!agreement);
-
-  const handleSendBook = async () => {
+  const handleSaveBook = async () => {
     try {
-      const result = await addBook(
-        title,
-        age,
-        bookTags,
-        summary,
-        comment,
-        agreement,
-      );
+      if (id === undefined) return;
+
+      const result = await updateBook(id, title, age, tags, summary, comment);
       console.log(result);
     } catch (e) {
       console.log(e);
     }
   };
 
+  const setFields = (book: IBook) => {
+    setTitle(book.title);
+    setTags(book.tags);
+    setAge(book.ageRestriction);
+    setComment(book.commentRestriction);
+    setSummary(book.summary);
+    setAgreement(book.agreement);
+  };
+
+  useEffect(() => {
+    if (id === undefined) return;
+
+    getBook(id)
+      .then((book) => setFields(book))
+      .catch((e) => console.log(e));
+  }, []);
+
   return (
     <DefaultPageLayout>
       <Container className="content">
-        <h2>Добавить новую книгу</h2>
-        <Form className="addBook">
+        <h2>Изменить книгу</h2>
+        <Form>
           <Container className="inputText">
             <Form.Group className="mb-2">
               <Form.Label>Название книги: </Form.Label>
@@ -71,6 +83,7 @@ export default function EditBook() {
                   type="radio"
                   label={option}
                   name="radioAge"
+                  checked={option === age}
                   onChange={() => setAge(option)}
                 />
               </div>
@@ -80,8 +93,8 @@ export default function EditBook() {
                 <Form.Label>Метки: </Form.Label>
                 <Form.Control
                   name="tags"
-                  value={bookTags}
-                  onChange={changeBookTags}
+                  value={tags}
+                  onChange={changeTags}
                   type="text"
                   as="textarea"
                   rows={3}
@@ -111,29 +124,18 @@ export default function EditBook() {
                   type="radio"
                   label={option}
                   name="radioComments"
+                  checked={option === comment}
                   onChange={() => setComment(option)}
                 />
               </div>
             ))}
-            <Stack direction="horizontal" gap={3}>
-              <Form.Check
-                type="checkbox"
-                name="chackboxAgreement"
-                onChange={changeAgreement}
-                checked={agreement}
-                label="Я подтверждаю, что являюсь автором публикуемого мной текста и
-                понимаю, что публикация чужих работ или публикация работ,
-                нарушающих правила, может привести к удалению этих работ и
-                блокировке к доступу на сайт"
-              />
-            </Stack>
 
             <Button
               type="button"
-              className="mb-2"
-              onClick={handleSendBook}
+              className="mt-2"
+              onClick={handleSaveBook}
               as="input"
-              value="Сохранить и перейти к публикации"
+              value="Сохранить"
             />
           </Container>
         </Form>
