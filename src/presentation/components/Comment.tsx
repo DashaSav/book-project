@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card, Button, Badge } from "react-bootstrap";
 import "../styles/App.scss";
+import ModalReportComment from "./modals/ModalReportComment";
 
 interface CommentProps {
   comment: IComment;
@@ -12,6 +13,16 @@ const Comment = ({ comment }: CommentProps) => {
   const handleLikeClick = () => {
     setLikeCount(likeCount + 1);
   };
+  const handleReportCommentClick = async () => {
+    try {
+      //тут всплывающая модалка с подтверждением что пользователь хочет удалить книгу
+      await reportComment(user._id);
+      setShowReportCommentModal(false);
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Card className="comment">
@@ -21,8 +32,15 @@ const Comment = ({ comment }: CommentProps) => {
         <Button variant="primary" onClick={handleLikeClick}>
           Лайк <Badge>{likeCount}</Badge>
         </Button>{" "}
-        <Button variant="danger">Пожаловаться</Button>
+        <Button onClick={setShowReportCommentModal(true)} variant="danger">
+          Пожаловаться
+        </Button>
       </Card.Body>
+      <ModalReportComment
+        show={showReportCommentModal}
+        onHide={() => setShowReportCommentModal(false)}
+        onReport={reportComment}
+      />
     </Card>
   );
 };

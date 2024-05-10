@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Stack } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import "../styles/App.scss";
 import Container from "react-bootstrap/Container";
@@ -68,11 +68,11 @@ export default function BookPage() {
           <h2>Содержание</h2>
           <p>Главы:</p>
           {/* Тут будет список глав*/}
-          <div className="flex-cont">
+          <Stack direction="vertical">
             {chapters.map((chapter) => (
-              <Chapter chapter={chapter} />
+              <Chapter chapter={chapter} key={chapter._id} />
             ))}
-          </div>
+          </Stack>
         </Container>
         <Container className="AboutBook">
           <p>
@@ -84,10 +84,6 @@ export default function BookPage() {
           <p>Жанры: </p>
           <p>Статус: </p>
           <p>Дата публикации: </p>
-          <p>
-            Комментарий автора к книге:{" "}
-            {book?.commentRestriction ?? "Не указан"}
-          </p>
         </Container>
         <Container className="Comments">
           <h2>Комментарии</h2>

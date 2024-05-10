@@ -1,8 +1,8 @@
 interface IChapter {
-    book: IBook;
-    name: string;
+    bookId: string;
+    title: string;
     text: string;
-   authorComment: string;
+    comment: string;
   }
   
   type DBChapter = IChapter & {
