@@ -1,15 +1,13 @@
-import React, { useState } from "react";
 import "../styles/App.scss";
 
 interface StarRatingProps {
-  initialValue?: number;
+  value?: number;
+  onUpdate: (rating: number) => Promise<void>;
 }
 
-const StarRating = ({ initialValue = 0 }: StarRatingProps) => {
-  const [rating, setRating] = useState(initialValue);
-
+const StarRating = ({ value = 0, onUpdate }: StarRatingProps) => {
   const handleStarClick = (star: number) => {
-    setRating(star);
+    onUpdate(star);
   };
 
   return (
@@ -17,13 +15,13 @@ const StarRating = ({ initialValue = 0 }: StarRatingProps) => {
       {[1, 2, 3, 4, 5].map((star) => (
         <span
           key={star}
-          className={star <= rating ? "star highlighted" : "star"}
+          className={star <= value ? "star highlighted" : "star"}
           onClick={() => handleStarClick(star)}
         >
           &#9733;{" "}
         </span>
       ))}
-      <p>{rating} звезд(ы)</p>
+      <p>{value} звезд(ы)</p>
     </div>
   );
 };

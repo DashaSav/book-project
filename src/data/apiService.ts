@@ -247,7 +247,7 @@ export async function getUserBooks(): Promise<DBBook[]> {
   return (await axios.get(API_URL + "books/findByUser/" + userId)).data;
 }
 
-export const getBook = async (id: string) => {
+export const getBook = async (id: string): Promise<DBBook> => {
   const response = await axios.get(API_URL + "books/" + id);
 
   return response.data;
@@ -303,6 +303,36 @@ export async function sendReport(
 
   return (
     await axios.post(API_URL + "reports/", report, { headers: getHeaders() })
+  ).data;
+}
+// endregion
+
+// region rating
+export async function updateRating(
+  bookId: string,
+  grade: number,
+): Promise<DBRating> {
+  const userId = getUserId()!;
+
+  const rating: IRating = {
+    userId: userId,
+    bookId: bookId,
+    grade: grade,
+  };
+
+  return (
+    await axios.post(API_URL + "ratings/", rating, { headers: getHeaders() })
+  ).data;
+}
+
+export async function getUserRating(bookId: string): Promise<DBRating> {
+  const userId = getUserId()!;
+
+  return (
+    await axios.get(
+      API_URL + "ratings/findByUserAndBook/" + userId + "/" + bookId,
+      { headers: getHeaders() },
+    )
   ).data;
 }
 // endregion

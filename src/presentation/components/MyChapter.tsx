@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BsTrashFill, BsPencilSquare } from "react-icons/bs";
 import "../styles/App.scss";
-import { Card } from "react-bootstrap";
+import { Card, Stack } from "react-bootstrap";
 import { deleteChapter } from "../../data/apiService";
 import ModalDeleteChapter from "./modals/ModalDeleteChapter";
 import { useNavigate } from "react-router-dom";
@@ -35,11 +35,13 @@ const MyChapter = ({ chapter, index }: ChapterProps) => {
   return (
     <Card className="chapter">
       <Card.Body>
-        <BsTrashFill
-          onClick={() => setShowDeleteChapterModal(true)}
-        ></BsTrashFill>
-        <BsPencilSquare onClick={() => handleEditClick()} />
-        {`${index}. ${chapter.title}`}
+        <Stack direction="horizontal" gap={1}>
+          <BsTrashFill
+            onClick={() => setShowDeleteChapterModal(true)}
+          ></BsTrashFill>
+          <BsPencilSquare onClick={() => handleEditClick()} />
+          {`${index + 1}. ${chapter.title}`}
+        </Stack>
       </Card.Body>
 
       <ModalDeleteChapter

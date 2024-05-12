@@ -8,8 +8,8 @@ const Routes = {
   bookChaptersEdit: "/book/:id/editChapters",
   myProfile: "/myProfile",
   chapterAdd: "/chapter/add/:bookId",
-  chapterRead: "/chapter/:chapterId/read", // TODO
-  chapterEdit: "/chapter/:chapterId/edit", // TODO
+  chapterRead: "/chapter/:chapterId/read",
+  chapterEdit: "/chapter/:chapterId/edit",
   myBooks: "/myBooks",
   myComments: "/myComments",
   favorites: "/favorites", // TODO

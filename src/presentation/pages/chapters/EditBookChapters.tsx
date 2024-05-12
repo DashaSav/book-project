@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import DefaultPageLayout from "../DefaultPage";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Stack } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { getBook, getChapters } from "../../../data/apiService";
 import MyChapter from "../../components/MyChapter";
@@ -34,9 +34,11 @@ export default function EditBookChapters() {
     <DefaultPageLayout>
       <Container className="content">
         <h2 className="mb-3">Главы книги {book?.title}</h2>
-        {chapters.map((chapter, i) => (
-          <MyChapter chapter={chapter} index={i} />
-        ))}
+        <Stack gap={2}>
+          {chapters.map((chapter, i) => (
+            <MyChapter chapter={chapter} index={i} />
+          ))}
+        </Stack>
         <Button className="mt-3" onClick={handleAddChapter}>
           Добавить новую главу
         </Button>

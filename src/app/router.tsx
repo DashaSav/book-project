@@ -14,6 +14,7 @@ import Routes from "./routes";
 import EditBook from "../presentation/pages/books/EditBook";
 import EditBookChapters from "../presentation/pages/chapters/EditBookChapters";
 import EditChapter from "../presentation/pages/chapters/EditChapter";
+import ReadChapter from "../presentation/pages/chapters/ReadChapter";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
   {
     path: Routes.bookChaptersEdit,
     element: <EditBookChapters />,
+  },
+  {
+    path: Routes.chapterRead,
+    element: <ReadChapter />,
   },
 ]);
 

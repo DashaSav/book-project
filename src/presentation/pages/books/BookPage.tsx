@@ -13,16 +13,19 @@ import {
   getBook,
   getChapters,
   getCommentsByBook,
+  getUserRating,
+  updateRating,
 } from "../../../data/apiService";
 import Chapter from "../../components/Chapter";
 
 export default function BookPage() {
   const { id } = useParams();
 
-  const [book, setBook] = useState<IBook>();
+  const [book, setBook] = useState<DBBook>();
   const [chapters, setChapters] = useState<DBChapter[]>([]);
   const [comments, setComments] = useState<IComment[]>([]);
   const [userComment, setUserComment] = useState("");
+  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     if (id === undefined) return;
@@ -38,47 +41,74 @@ export default function BookPage() {
     getChapters(id)
       .then((chapters) => setChapters(chapters))
       .catch((e) => console.log(e));
-  }, []);
+
+    getUserRating(id)
+      .then((rating) => setRating(rating.grade))
+      .catch((e) => console.log(e));
+  }, [id]);
 
   const changeUserComment = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUserComment(e.currentTarget.value);
 
   const submitComment = () => {
     if (id === undefined) return;
-
     addComment(id, userComment);
+  };
+
+  const handleUpdateRating = async (rating: number) => {
+    if (id === undefined) return;
+
+    try {
+      await updateRating(id, rating);
+      setRating(rating);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <DefaultPageLayout>
-      <Container>
-        <h2>{book?.title ?? "Название книги"}</h2>
-        <Container>
-          <img src={logo} className="book-cover" alt="logo" />
-          <StarRating initialValue={0}></StarRating>
-          <h2>Содержание</h2>
-          <p>Главы:</p>
-          {/* Тут будет список глав*/}
-          <Stack direction="vertical">
-            {/* для нумерации глав используем индекс i */}
-            {chapters.map((chapter, i) => (
-              <Chapter chapter={chapter} key={chapter._id} index={i + 1} />
-            ))}
+      <Container className="content">
+        <h2 className="text-center mb-4">{book?.title ?? "Название книги"}</h2>
+
+        <Stack
+          direction="horizontal"
+          className="justify-content-start align-items-start"
+          gap={2}
+        >
+          <Stack className="w-25">
+            <img
+              src={logo}
+              className="book-cover align-self-center"
+              alt="logo"
+            />
+            <div className="align-self-center">
+              <StarRating value={rating} onUpdate={handleUpdateRating} />
+            </div>
+            <h3 className="mt-3">Содержание</h3>
+            <h4>Главы:</h4>
+            <Stack direction="vertical">
+              {/* для нумерации глав используем индекс i */}
+              {chapters.map((chapter, i) => (
+                <Chapter chapter={chapter} key={chapter._id} index={i + 1} />
+              ))}
+            </Stack>
           </Stack>
-        </Container>
-        <Container className="AboutBook">
-          <p>
-            Содержание книги: {book?.summary ?? "Тут должно быть содержание"}
-          </p>
-          <p>Автор книги: {book?.user.name ?? "Не указан"}</p>
-          <p>Метки: {book?.tags ?? "Не указан"}</p>
-          <p>Возрастное ограничение: {book?.ageRestriction ?? "Не указано"}</p>
-          <p>Жанры: </p>
-          <p>Статус: </p>
-          <p>Дата публикации: </p>
-        </Container>
-        <Container className="Comments">
-          <h2>Комментарии</h2>
+
+          <Stack>
+            <p>Описание книги: {book?.summary ?? "Не указано"}</p>
+            <p>Автор книги: {book?.user.name ?? "Не указан"}</p>
+            <p>Метки: {book?.tags ?? "Не указан"}</p>
+            <p>
+              Возрастное ограничение: {book?.ageRestriction ?? "Не указано"}
+            </p>
+            <p>Жанры: </p>
+            <p>Статус: </p>
+            <p>Дата публикации: </p>
+          </Stack>
+        </Stack>
+        <Stack className="mt-4">
+          <h3>Комментарии</h3>
           <Form.Control
             className="mb-2"
             as="textarea"
@@ -98,7 +128,7 @@ export default function BookPage() {
           {comments.map((comment) => (
             <Comment comment={comment} />
           ))}
-        </Container>
+        </Stack>
       </Container>
     </DefaultPageLayout>
   );
