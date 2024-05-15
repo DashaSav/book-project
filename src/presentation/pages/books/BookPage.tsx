@@ -14,9 +14,11 @@ import {
   getChapters,
   getCommentsByBook,
   getUserRating,
+  sendReport,
   updateRating,
 } from "../../../data/apiService";
 import Chapter from "../../components/Chapter";
+import ModalReportBook from "../../components/modals/ModalReportBook";
 
 export default function BookPage() {
   const { id } = useParams();
@@ -26,6 +28,17 @@ export default function BookPage() {
   const [comments, setComments] = useState<IComment[]>([]);
   const [userComment, setUserComment] = useState("");
   const [rating, setRating] = useState(0);
+  const [showReportBookModal, setShowReportBookModal] = useState(false);
+
+  const handleReportBook = async (text: string) => {
+    try {
+      if (book === undefined) return;
+      await sendReport(book.userId, text);
+      setShowReportBookModal(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   useEffect(() => {
     if (id === undefined) return;
@@ -105,6 +118,14 @@ export default function BookPage() {
             <p>Жанры: </p>
             <p>Статус: </p>
             <p>Дата публикации: </p>
+            <Button
+              className="mt-2"
+              type="submit"
+              as="input"
+              variant="danger"
+              value="Пожаловаться на книгу "
+              onClick={() => setShowReportBookModal(true)}
+            />
           </Stack>
         </Stack>
         <Stack className="mt-4">
@@ -130,6 +151,11 @@ export default function BookPage() {
           ))}
         </Stack>
       </Container>
+      <ModalReportBook
+        show={showReportBookModal}
+        onHide={() => setShowReportBookModal(false)}
+        onReport={handleReportBook}
+      />
     </DefaultPageLayout>
   );
 }

@@ -64,7 +64,9 @@ export default function ReadChapter() {
         <Button onClick={handleNextClick}>Следующая глава</Button>
       </Stack>
 
-      <h4 className="text-end">{chapter?.comment}</h4>
+      <h4 className=" ms-5 justify-content-end text-start">
+        {chapter?.comment}
+      </h4>
       <p>{chapter?.text}</p>
     </DefaultPageLayout>
   );

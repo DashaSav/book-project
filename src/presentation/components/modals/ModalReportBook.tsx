@@ -3,17 +3,13 @@ import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
 
-interface ModalReportCommentProps {
+interface ModalReportBookProps {
   show: boolean;
   onHide: () => void;
   onReport: (text: string) => void;
 }
 
-function ModalReportComment({
-  show,
-  onHide,
-  onReport,
-}: ModalReportCommentProps) {
+function ModalReportBook({ show, onHide, onReport }: ModalReportBookProps) {
   const [reportText, setReportText] = useState("");
 
   const changeComplaintText = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -22,14 +18,14 @@ function ModalReportComment({
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Пожаловаться на пользователя</Modal.Title>
+        <Modal.Title>Пожаловаться на книгу</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
         <p>
-          Укажите причину, по которой вы решили пожаловаться на комментарий. Для
-          более быстрого рассмотрения жалобы рекомендуется прикрепить отрывок
-          комментария, подтверждающий вашу жалобу.
+          Укажите причину, по которой вы решили пожаловаться на книгу. Для более
+          быстрого рассмотрения жалобы рекомендуется прикрепить отрывок из
+          книги, подтверждающий вашу жалобу.
         </p>
         <Form.Group className="mb-2">
           <Form.Label>Текстовый редактор</Form.Label>
@@ -57,4 +53,4 @@ function ModalReportComment({
   );
 }
 
-export default ModalReportComment;
+export default ModalReportBook;
