@@ -14,7 +14,7 @@ import {
   getChapters,
   getCommentsByBook,
   getUserRating,
-  sendReport,
+  sendBookReport,
   updateRating,
 } from "../../../data/apiService";
 import Chapter from "../../components/Chapter";
@@ -33,7 +33,7 @@ export default function BookPage() {
   const handleReportBook = async (text: string) => {
     try {
       if (book === undefined) return;
-      await sendReport(book.userId, text);
+      await sendBookReport(book._id, text);
       setShowReportBookModal(false);
     } catch (e) {
       console.log(e);

@@ -1,9 +1,20 @@
 interface IReport {
   userId: string;
-  reportedUserId: string;
   report: string;
 }
 
-interface DBReport extends IReport {
+interface IUserReport extends IReport {
+  reportedUserId: string;
+}
+
+interface DBUserReport extends IUserReport {
+  _id: string;
+}
+
+interface IBookReport extends IReport {
+  reportedBookId: string;
+}
+
+interface DBBookReport extends IBookReport {
   _id: string;
 }

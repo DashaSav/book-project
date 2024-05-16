@@ -7,6 +7,7 @@ const Routes = {
   bookEdit: "/book/:id/edit",
   bookChaptersEdit: "/book/:id/editChapters",
   myProfile: "/myProfile",
+  author: "/author/:id",
   chapterAdd: "/chapter/add/:bookId",
   chapterRead: "/chapter/:chapterId/read",
   chapterEdit: "/chapter/:chapterId/edit",

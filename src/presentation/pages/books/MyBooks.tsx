@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUserBooks } from "../../../data/apiService";
+import { getCurrentUserBooks } from "../../../data/apiService";
 import DefaultPageLayout from "../DefaultPage";
 import MyBook from "../../components/MyBook";
 
@@ -7,7 +7,7 @@ export default function MyBooks() {
   const [books, setBooks] = useState<DBBook[]>([]);
 
   useEffect(() => {
-    getUserBooks()
+    getCurrentUserBooks()
       .then((books) => setBooks(books))
       .catch((e) => console.log(e));
   }, []);

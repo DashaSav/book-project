@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, Button, Badge } from "react-bootstrap";
 import "../styles/App.scss";
 import ModalReportComment from "./modals/ModalReportComment";
-import { sendReport } from "../../data/apiService";
+import { sendUserReport } from "../../data/apiService";
 
 interface CommentProps {
   comment: IComment;
@@ -19,7 +19,7 @@ const Comment = ({ comment }: CommentProps) => {
   const handleReportClick = async (text: string) => {
     try {
       //тут всплывающая модалка с подтверждением что пользователь хочет удалить книгу
-      await sendReport(comment.userId, text);
+      await sendUserReport(comment.userId, text);
       setShowModal(false);
     } catch (e) {
       console.log(e);

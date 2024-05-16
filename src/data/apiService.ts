@@ -8,8 +8,8 @@ import {
   saveUserId,
 } from "./storage";
 
-const API_URL = "http://0.tcp.eu.ngrok.io:16149/";
-  
+const API_URL = "http://localhost:8080/";
+
 // region user and auth flow
 export const register = async (
   name: string,
@@ -240,11 +240,15 @@ export async function getBooks(): Promise<DBBook[]> {
   return (await axios.get(API_URL + "books/")).data;
 }
 
-export async function getUserBooks(): Promise<DBBook[]> {
+export async function getCurrentUserBooks(): Promise<DBBook[]> {
   const userId = getUserId();
   if (userId === null) return [];
 
   return (await axios.get(API_URL + "books/findByUser/" + userId)).data;
+}
+
+export async function getUserBooks(id: string): Promise<DBBook[]> {
+  return (await axios.get(API_URL + "books/findByUser/" + id)).data;
 }
 
 export const getBook = async (id: string): Promise<DBBook> => {
@@ -289,20 +293,41 @@ export async function getFavorites(): Promise<DBBook[]> {
 // endregion
 
 // region reports
-export async function sendReport(
+export async function sendUserReport(
   reportedUserId: string,
   reportText: string,
-): Promise<DBReport> {
+): Promise<DBUserReport> {
   const userId = getUserId()!;
 
-  const report: IReport = {
+  const report: IUserReport = {
     userId: userId,
     reportedUserId: reportedUserId,
     report: reportText,
   };
 
   return (
-    await axios.post(API_URL + "reports/", report, { headers: getHeaders() })
+    await axios.post(API_URL + "reports/users", report, {
+      headers: getHeaders(),
+    })
+  ).data;
+}
+
+export async function sendBookReport(
+  reportedBookId: string,
+  reportText: string,
+): Promise<DBUserReport> {
+  const userId = getUserId()!;
+
+  const report: IBookReport = {
+    userId: userId,
+    reportedBookId: reportedBookId,
+    report: reportText,
+  };
+
+  return (
+    await axios.post(API_URL + "reports/books", report, {
+      headers: getHeaders(),
+    })
   ).data;
 }
 // endregion

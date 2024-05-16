@@ -1,4 +1,4 @@
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Stack } from "react-bootstrap";
 import logo from "../../assets/logoOwlBook.png";
 import { useNavigate } from "react-router-dom";
 import Routes, { prepareUrl } from "../../app/routes";
@@ -16,8 +16,13 @@ export default function Book({ book }: BookProps) {
       <Card style={{ width: "18rem" }}>
         <Card.Img variant="top" src={logo} />
         <Card.Body>
-          <MdOutlineFavoriteBorder />
-          <Card.Title>{book.title}</Card.Title>
+          <Stack
+            direction="horizontal"
+            className="justify-content-between align-items-start"
+          >
+            <Card.Title>{book.title}</Card.Title>
+            <MdOutlineFavoriteBorder />
+          </Stack>
           <Card.Text>{book.user.name}</Card.Text>
           <Card.Text>{book.summary}</Card.Text>
           <Button variant="primary" onClick={handleReadClick}>

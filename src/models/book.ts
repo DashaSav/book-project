@@ -7,10 +7,11 @@ interface IBook {
   commentRestriction: string;
   ageRestriction: string;
   agreement: boolean;
+  createdAt: Date;
 }
 
-type BookCreate = Omit<IBook, "user">;
-type BookUpdate = Omit<BookCreate, "agreement">;
+type BookCreate = Omit<IBook, "user" | "createdAt">;
+type BookUpdate = Omit<BookCreate, "agreement" | "createdAt">;
 
 type DBBook = IBook & {
   _id: string;

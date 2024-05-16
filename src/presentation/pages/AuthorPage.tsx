@@ -1,28 +1,28 @@
-import { Button, Stack } from "react-bootstrap";
+import { Stack } from "react-bootstrap";
 import "../../styles/App.scss";
 import Container from "react-bootstrap/Container";
 import logo from "../../../assets/logoOwlBook.png";
-import DefaultPageLayout from "../pages/DefaultPage";
+import DefaultPageLayout from "./DefaultPage";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getBook, getBooks } from "../../data/apiService";
+import { getUserBooks } from "../../data/apiService";
 import Book from "../components/Book";
 
-export default function AutorPage() {
+export default function AuthorPage() {
   const { id } = useParams();
   const [books, setBooks] = useState<DBBook[]>([]);
-  const [book, setBook] = useState<DBBook>();
+  const [latestBook, setLatestBook] = useState<DBBook>();
 
   useEffect(() => {
     if (id === undefined) return;
 
-    getBooks()
-      .then((books) => setBooks(books))
+    getUserBooks(id)
+      .then((books) => {
+        setBooks(books);
+        setLatestBook(books[books.length - 1]);
+      })
       .catch((e) => console.log(e));
 
-    getBook(id)
-      .then((fetched) => setBook(fetched))
-      .catch((e) => console.log(e));
     // getUserRating(id)
     //   .then((rating) => setRating(rating.grade))
     //   .catch((e) => console.log(e));
@@ -31,21 +31,16 @@ export default function AutorPage() {
   return (
     <DefaultPageLayout>
       <Container className="content">
-        <Stack>
-          <p>Страница автора: {book?.user.name ?? "Не указан"}</p>
-        </Stack>
+        <h2>{latestBook?.user.name ?? ""}</h2>
+
         <Stack className="w-25">
           <img src={logo} className="book-cover align-self-center" alt="logo" />
 
-          <p>Количество книг: {book?.user.name ?? "Не указан"}</p>
+          <p>Количество книг: {books.length}</p>
+
           <p>
-            Самая популярная книга: {book?.user.name ?? "Не указан"} И дата
-            публикации:
-            {book?.user.name ?? "Не указан"}{" "}
-          </p>
-          <p>
-            Последняя книга: {book?.user.name ?? "Не указан"} И дата публикации:
-            {book?.user.name ?? "Не указан"}
+            Последняя книга: {latestBook?.title ?? ""} И дата публикации:
+            {latestBook?.createdAt.toDateString() ?? ""}
           </p>
         </Stack>
         <Stack>
