@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import DefaultPageLayout from "./DefaultPage";
-import { getFavorites } from "../../data/apiService";
+import { getFavoriteBooks } from "../../data/apiService";
 import Book from "../components/Book";
 
 export default function Favorites() {
   const [books, setBooks] = useState<DBBook[]>([]);
 
   useEffect(() => {
-    getFavorites()
+    getFavoriteBooks()
       .then((books) => setBooks(books))
       .catch((e) => console.log(e));
   }, []);

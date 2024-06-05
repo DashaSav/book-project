@@ -18,6 +18,7 @@ const StarRating = ({ value = 0, onUpdate }: StarRatingProps) => {
           className={star <= value ? "star highlighted" : "star"}
           onClick={() => handleStarClick(star)}
         >
+          {/* этот код это окрашенная звезда */}
           &#9733;{" "}
         </span>
       ))}

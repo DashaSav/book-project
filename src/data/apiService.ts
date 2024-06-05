@@ -287,8 +287,23 @@ export const addComment = async (bookId: string, content: string) => {
 // endregion
 
 // region favorites
-export async function getFavorites(): Promise<DBBook[]> {
-  return (await axios.get(API_URL + "books/")).data;
+export async function getFavoriteBooks(): Promise<DBBook[]> {
+  const userId = getUserId()!;
+  return (await axios.get(API_URL + "favorites/" + userId + "/books")).data;
+}
+
+export async function addFavoriteBook(bookId: string): Promise<DBBook> {
+  const userId = getUserId()!;
+  return (
+    await axios.post(API_URL + "favorites/" + userId + "/books/" + bookId)
+  ).data;
+}
+
+export async function deleteFavoriteBook(bookId: string): Promise<DBBook> {
+  const userId = getUserId()!;
+  return (
+    await axios.delete(API_URL + "favorites/" + userId + "/books/" + bookId)
+  ).data;
 }
 // endregion
 

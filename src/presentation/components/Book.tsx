@@ -1,15 +1,29 @@
 import { Card, Button, Stack } from "react-bootstrap";
 import logo from "../../assets/logoOwlBook.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Routes, { prepareUrl } from "../../app/routes";
-import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
+import { useState } from "react";
 
 type BookProps = { book: DBBook };
 
 export default function Book({ book }: BookProps) {
   const navigate = useNavigate();
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
   const handleReadClick = () =>
     navigate(prepareUrl(Routes.bookpage, { id: book._id }));
+
+  const handleAddFavorite = () => {
+    book.isFavorite = true;
+    setIsFavorite(true);
+  };
+
+  const handleRemoveFavorite = () => {
+    book.isFavorite = false;
+    setIsFavorite(false);
+  };
 
   return (
     <>
@@ -20,10 +34,16 @@ export default function Book({ book }: BookProps) {
             direction="horizontal"
             className="justify-content-between align-items-start"
           >
-            <Card.Title>{book.title}</Card.Title>
-            <MdOutlineFavoriteBorder />
+            <Card.Title className="text-break">{book.title}</Card.Title>
+            {isFavorite ? (
+              <MdFavorite onClick={handleRemoveFavorite} />
+            ) : (
+              <MdOutlineFavoriteBorder onClick={handleAddFavorite} />
+            )}
           </Stack>
-          <Card.Text>{book.user.name}</Card.Text>
+          <Link to={prepareUrl(Routes.author, { id: book.userId })}>
+            {book.user.name}
+          </Link>
           <Card.Text>{book.summary}</Card.Text>
           <Button variant="primary" onClick={handleReadClick}>
             Читать

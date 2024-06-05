@@ -7,6 +7,7 @@ interface IBook {
   commentRestriction: string;
   ageRestriction: string;
   agreement: boolean;
+  isFavorite?: boolean;
   createdAt: Date;
 }
 

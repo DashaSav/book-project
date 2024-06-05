@@ -4,6 +4,8 @@ import Container from "react-bootstrap/Container";
 import DefaultPageLayout from "../DefaultPage";
 import { useState } from "react";
 import { addBook } from "../../../data/apiService";
+import Routes from "../../../app/routes";
+import { useNavigate } from "react-router-dom";
 
 export default function AddBook() {
   const radioAge = ["6+", "12+", "16+", "18+"];
@@ -18,6 +20,7 @@ export default function AddBook() {
   const [age, setAge] = useState(radioAge[0]);
   const [comment, setComment] = useState(radioComments[0]);
   const [agreement, setAgreement] = useState(false);
+  const navigate = useNavigate();
 
   const changeTitle = (e: React.ChangeEvent<HTMLInputElement>) =>
     setTitle(e.currentTarget.value);
@@ -41,6 +44,7 @@ export default function AddBook() {
         comment,
         agreement,
       );
+      navigate(Routes.myBooks);
       console.log(result);
     } catch (e) {
       console.log(e);

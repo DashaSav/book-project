@@ -6,7 +6,7 @@ import logo from "../../../assets/logoOwlBook.png";
 import StarRating from "../../components/StarRating";
 import Comment from "../../components/Comment";
 import DefaultPageLayout from "../DefaultPage";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   addComment,
@@ -19,6 +19,7 @@ import {
 } from "../../../data/apiService";
 import Chapter from "../../components/Chapter";
 import ModalReportBook from "../../components/modals/ModalReportBook";
+import Routes, { prepareUrl } from "../../../app/routes";
 
 export default function BookPage() {
   const { id } = useParams();
@@ -110,7 +111,15 @@ export default function BookPage() {
 
           <Stack>
             <p>Описание книги: {book?.summary ?? "Не указано"}</p>
-            <p>Автор книги: {book?.user.name ?? "Не указан"}</p>
+            <p>
+              Автор книги:
+              <Link
+                className="ms-2"
+                to={prepareUrl(Routes.author, { id: book?.userId })}
+              >
+                {book?.user.name}
+              </Link>
+            </p>
             <p>Метки: {book?.tags ?? "Не указан"}</p>
             <p>
               Возрастное ограничение: {book?.ageRestriction ?? "Не указано"}

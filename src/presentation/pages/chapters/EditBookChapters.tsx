@@ -23,7 +23,7 @@ export default function EditBookChapters() {
     getChapters(id)
       .then((chapters) => setChapters(chapters))
       .catch((e) => console.log(e));
-  }, []);
+  }, [id]);
 
   const handleAddChapter = () => {
     if (id === undefined) return;

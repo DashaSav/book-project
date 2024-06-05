@@ -30,7 +30,7 @@ export default function MyProfile() {
 
   const handleUpdateUser = async () => {
     try {
-      const user = await updateUser(email, name, password, passwordRepeat);
+      await updateUser(email, name, password, passwordRepeat);
     } catch (e) {
       console.log(e);
     }

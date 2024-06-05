@@ -14,10 +14,8 @@ const DefaultPageLayout: React.FC<DefaultPageProps> = ({ children }) => {
 
       <Container fluid>
         <Row>
-          <Col className="no-gutters" sm={2}>
-            <div className="sidebar">
-              <Sidebar />
-            </div>
+          <Col className="no-gutters sidebar" sm={2}>
+            <Sidebar />
           </Col>
           <Col className="no-gutters" sm={10}>
             <Container>{children}</Container>

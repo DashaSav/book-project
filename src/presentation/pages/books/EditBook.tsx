@@ -1,4 +1,4 @@
-import { Button, Form, Stack } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import "../../styles/App.scss";
 import Container from "react-bootstrap/Container";
 import DefaultPageLayout from "../DefaultPage";
@@ -58,7 +58,7 @@ export default function EditBook() {
     getBook(id)
       .then((book) => setFields(book))
       .catch((e) => console.log(e));
-  }, []);
+  }, [id]);
 
   return (
     <DefaultPageLayout>

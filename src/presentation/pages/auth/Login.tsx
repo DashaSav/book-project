@@ -11,16 +11,16 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const resetStates = () => {
+    setEmail("");
+    setPassword("");
+  };
+
   const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmail(e.currentTarget.value);
 
   const changePassword = (e: React.ChangeEvent<HTMLInputElement>) =>
     setPassword(e.currentTarget.value);
-
-  const resetStates = () => {
-    setEmail("");
-    setPassword("");
-  };
 
   const handleLogin = async () => {
     try {

@@ -15,6 +15,7 @@ import EditBook from "../presentation/pages/books/EditBook";
 import EditBookChapters from "../presentation/pages/chapters/EditBookChapters";
 import EditChapter from "../presentation/pages/chapters/EditChapter";
 import ReadChapter from "../presentation/pages/chapters/ReadChapter";
+import AuthorPage from "../presentation/pages/AuthorPage";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: Routes.myProfile,
     element: <MyProfile />,
+  },
+  {
+    path: Routes.author,
+    element: <AuthorPage />,
   },
   {
     path: Routes.chapterAdd,

@@ -56,7 +56,7 @@ export default function EditChapter() {
         setComment(chapter.comment);
       })
       .catch((e) => console.log(e));
-  }, []);
+  }, [chapterId]);
 
   return (
     <DefaultPageLayout>
