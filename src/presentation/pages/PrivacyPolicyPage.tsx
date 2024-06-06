@@ -1,6 +1,8 @@
+import { Container } from "react-bootstrap";
+
 export default function PrivacyPolicy() {
   return (
-    <>
+    <Container>
       <h3>Политика конфиденциальности</h3>
 
       <p>
@@ -98,6 +100,6 @@ export default function PrivacyPolicy() {
         действующими законами и правилами. Также рекомендуется попросить юриста
         просмотреть вашу политику, прежде чем публиковать ее на вашем веб-сайте.
       </p>
-    </>
+    </Container>
   );
 }

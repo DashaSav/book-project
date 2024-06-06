@@ -4,13 +4,15 @@ import "../../styles/App.scss";
 import logo from "../../../assets/logoOwlBook.png";
 import { useState } from "react";
 import { register } from "../../../data/apiService";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Routes from "../../../app/routes";
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [agreedWithPolicy, setAgreedWithPolicy] = useState(false);
+
   const navigate = useNavigate();
 
   const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -28,6 +30,8 @@ function SignUp() {
 
   const handleSignup = async () => {
     try {
+      if (agreedWithPolicy === false) return;
+
       const result = await register(name, email, password);
 
       if (result.status >= 200 && result.status < 300) {
@@ -92,13 +96,24 @@ function SignUp() {
 
           <Stack className="mt-2">
             <Button
-              className="mb-2"
+              className={agreedWithPolicy ? "mb-2" : "mb-2 disabled"}
               as="input"
               onClick={handleSignup}
               type="button"
               value="Зарегистрироваться"
             />
           </Stack>
+
+          <Form.Check>
+            <Form.Check.Input
+              type="checkbox"
+              onChange={() => setAgreedWithPolicy(!agreedWithPolicy)}
+              checked={agreedWithPolicy}
+            />
+            <Form.Check.Label>
+              Я согласен с <Link to={Routes.policy}>Правилами пользования</Link>
+            </Form.Check.Label>
+          </Form.Check>
         </Form>
 
         <p className="grey-text">

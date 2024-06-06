@@ -377,6 +377,24 @@ export async function getUserRating(bookId: string): Promise<DBRating> {
 }
 // endregion
 
+// region: search
+export async function searchBooks(book: string): Promise<DBBook[]> {
+  return (
+    await axios.get(API_URL + "books/findByTitle/" + book, {
+      headers: getHeaders(),
+    })
+  ).data;
+}
+
+export async function searchAuthors(name: string): Promise<IUser[]> {
+  return (
+    await axios.get(API_URL + "users/findByName/" + name, {
+      headers: getHeaders(),
+    })
+  ).data;
+}
+// endregion
+
 function getHeaders() {
   return {
     Authorization: `Bearer ${getToken()}`,

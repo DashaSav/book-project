@@ -2,6 +2,7 @@ import { Navbar, Form, Button, Stack, Col, Container } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Routes from "../../app/routes";
+import { searchAuthors, searchBooks } from "../../data/apiService";
 
 export default function BooksNavbar() {
   const navigate = useNavigate();
@@ -9,7 +10,19 @@ export default function BooksNavbar() {
 
   const changeSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchText(e.currentTarget.value);
+
   const handleLoginClick = () => navigate(Routes.login);
+  const handleSearchClick = async () => {
+    try {
+      const books = await searchBooks(searchText);
+      const authors = await searchAuthors(searchText);
+
+      console.log(books);
+      console.log(authors);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <>
@@ -30,7 +43,11 @@ export default function BooksNavbar() {
                   placeholder="Найти книгу, автора..."
                   aria-label="Search"
                 />
-                <Button type="submit" variant="outline-primary">
+                <Button
+                  type="button"
+                  variant="outline-primary"
+                  onClick={handleSearchClick}
+                >
                   Найти
                 </Button>
               </Stack>

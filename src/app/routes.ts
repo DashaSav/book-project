@@ -14,6 +14,7 @@ const Routes = {
   myBooks: "/myBooks",
   myComments: "/myComments",
   favorites: "/favorites", // TODO
+  policy: "/policy",
 };
 
 export type UrlArgs = { [arg: string]: any };

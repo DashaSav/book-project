@@ -16,6 +16,7 @@ import EditBookChapters from "../presentation/pages/chapters/EditBookChapters";
 import EditChapter from "../presentation/pages/chapters/EditChapter";
 import ReadChapter from "../presentation/pages/chapters/ReadChapter";
 import AuthorPage from "../presentation/pages/AuthorPage";
+import PrivacyPolicy from "../presentation/pages/PrivacyPolicyPage";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
   {
     path: Routes.chapterRead,
     element: <ReadChapter />,
+  },
+  {
+    path: Routes.policy,
+    element: <PrivacyPolicy />,
   },
 ]);
 
