@@ -7,3 +7,7 @@ interface IComment {
 }
 
 type CommentCreate = Omit<IComment, "user">;
+
+interface DBComment extends IComment {
+  _id: string;
+}

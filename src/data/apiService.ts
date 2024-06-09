@@ -259,16 +259,19 @@ export const getBook = async (id: string): Promise<DBBook> => {
 // endregion
 
 // region comments
-export async function getCommentsByBook(bookId: string): Promise<IComment[]> {
+export async function getCommentsByBook(bookId: string): Promise<DBComment[]> {
   return (await axios.get(API_URL + "comments/findByBook/" + bookId)).data;
 }
 
-export async function getCommentsByUser(): Promise<IComment[]> {
+export async function getCommentsByUser(): Promise<DBComment[]> {
   const userId = getUserId();
   return (await axios.get(API_URL + "comments/findByUser/" + userId)).data;
 }
 
-export const addComment = async (bookId: string, content: string) => {
+export const addComment = async (
+  bookId: string,
+  content: string,
+): Promise<DBComment> => {
   const userId = getUserId()!;
 
   const comment: CommentCreate = {
@@ -284,6 +287,12 @@ export const addComment = async (bookId: string, content: string) => {
 
   return response.data;
 };
+
+export async function deleteComment(commentId: string) {
+  await axios.delete(API_URL + "comments/" + commentId, {
+    headers: getHeaders(),
+  });
+}
 // endregion
 
 // region favorites
@@ -375,6 +384,15 @@ export async function getUserRating(bookId: string): Promise<DBRating> {
     )
   ).data;
 }
+
+export async function getBookRating(bookId: string): Promise<BookRating> {
+  return (
+    await axios.get(API_URL + "books/rating/" + bookId, {
+      headers: getHeaders(),
+    })
+  ).data;
+}
+
 // endregion
 
 // region: search
@@ -386,7 +404,7 @@ export async function searchBooks(book: string): Promise<DBBook[]> {
   ).data;
 }
 
-export async function searchAuthors(name: string): Promise<IUser[]> {
+export async function searchAuthors(name: string): Promise<DBUser[]> {
   return (
     await axios.get(API_URL + "users/findByName/" + name, {
       headers: getHeaders(),

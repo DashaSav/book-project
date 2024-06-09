@@ -64,9 +64,15 @@ export default function BookPage() {
   const changeUserComment = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUserComment(e.currentTarget.value);
 
-  const submitComment = () => {
+  const submitComment = async () => {
     if (id === undefined) return;
-    addComment(id, userComment);
+    try {
+      const newComment = await addComment(id, userComment);
+      setComments([newComment, ...comments]);
+      setUserComment("");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handleUpdateRating = async (rating: number) => {

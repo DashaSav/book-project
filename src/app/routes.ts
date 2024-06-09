@@ -15,6 +15,7 @@ const Routes = {
   myComments: "/myComments",
   favorites: "/favorites", // TODO
   policy: "/policy",
+  search: "/search/:text",
 };
 
 export type UrlArgs = { [arg: string]: any };

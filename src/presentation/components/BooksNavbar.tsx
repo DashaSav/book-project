@@ -1,8 +1,7 @@
 import { Navbar, Form, Button, Stack, Col, Container } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Routes from "../../app/routes";
-import { searchAuthors, searchBooks } from "../../data/apiService";
+import Routes, { prepareUrl } from "../../app/routes";
 
 export default function BooksNavbar() {
   const navigate = useNavigate();
@@ -12,16 +11,8 @@ export default function BooksNavbar() {
     setSearchText(e.currentTarget.value);
 
   const handleLoginClick = () => navigate(Routes.login);
-  const handleSearchClick = async () => {
-    try {
-      const books = await searchBooks(searchText);
-      const authors = await searchAuthors(searchText);
-
-      console.log(books);
-      console.log(authors);
-    } catch (e) {
-      console.log(e);
-    }
+  const handleSearchClick = () => {
+    navigate(prepareUrl(Routes.search, { text: searchText }));
   };
 
   return (

@@ -2,11 +2,12 @@ import "../styles/App.scss";
 
 interface StarRatingProps {
   value?: number;
-  onUpdate: (rating: number) => Promise<void>;
+  onUpdate?: (rating: number) => Promise<void>;
 }
 
 const StarRating = ({ value = 0, onUpdate }: StarRatingProps) => {
   const handleStarClick = (star: number) => {
+    if (onUpdate === undefined) return;
     onUpdate(star);
   };
 
@@ -22,7 +23,6 @@ const StarRating = ({ value = 0, onUpdate }: StarRatingProps) => {
           &#9733;{" "}
         </span>
       ))}
-      <p>{value} звезд(ы)</p>
     </div>
   );
 };

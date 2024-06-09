@@ -4,10 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import Routes, { prepareUrl } from "../../app/routes";
 import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 import { useState } from "react";
+import StarRating from "./StarRating";
 
-type BookProps = { book: DBBook };
+type BookProps = { book: DBBook; rating?: number };
 
-export default function Book({ book }: BookProps) {
+export default function Book({ book, rating }: BookProps) {
   const navigate = useNavigate();
 
   const [isFavorite, setIsFavorite] = useState(false);
@@ -41,9 +42,13 @@ export default function Book({ book }: BookProps) {
               <MdOutlineFavoriteBorder onClick={handleAddFavorite} />
             )}
           </Stack>
-          <Link to={prepareUrl(Routes.author, { id: book.userId })}>
-            {book.user.name}
-          </Link>
+
+          <Stack direction="vertical">
+            <StarRating value={rating} />
+            <Link to={prepareUrl(Routes.author, { id: book.userId })}>
+              {book.user.name}
+            </Link>
+          </Stack>
           <Card.Text>{book.summary}</Card.Text>
           <Button variant="primary" onClick={handleReadClick}>
             Читать
