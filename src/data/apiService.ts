@@ -298,20 +298,35 @@ export async function deleteComment(commentId: string) {
 // region favorites
 export async function getFavoriteBooks(): Promise<DBBook[]> {
   const userId = getUserId()!;
-  return (await axios.get(API_URL + "favorites/" + userId + "/books")).data;
+  return (
+    await axios.get(API_URL + "favorites/books/" + userId, {
+      headers: getHeaders(),
+    })
+  ).data;
 }
 
-export async function addFavoriteBook(bookId: string): Promise<DBBook> {
+export async function addFavoriteBook(bookId: string) {
   const userId = getUserId()!;
   return (
-    await axios.post(API_URL + "favorites/" + userId + "/books/" + bookId)
+    await axios.post(
+      API_URL + "favorites/books/",
+      {
+        userId: userId,
+        bookId: bookId,
+      },
+      {
+        headers: getHeaders(),
+      },
+    )
   ).data;
 }
 
 export async function deleteFavoriteBook(bookId: string): Promise<DBBook> {
   const userId = getUserId()!;
   return (
-    await axios.delete(API_URL + "favorites/" + userId + "/books/" + bookId)
+    await axios.delete(API_URL + "favorites/books/" + userId + "/" + bookId, {
+      headers: getHeaders(),
+    })
   ).data;
 }
 // endregion

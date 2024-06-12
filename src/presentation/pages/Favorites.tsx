@@ -18,7 +18,7 @@ export default function Favorites() {
         <h4 className="mb-2 mt-2">Мое избранное:</h4>
         <div className="flex-cont">
           {books.map((book) => (
-            <Book book={book} />
+            <Book book={book} isFavorite={true} />
           ))}
         </div>
       </DefaultPageLayout>
