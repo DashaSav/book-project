@@ -400,7 +400,7 @@ export async function getUserRating(bookId: string): Promise<DBRating> {
   ).data;
 }
 
-export async function getBookRating(bookId: string): Promise<BookRating> {
+export async function getBookRating(bookId: string): Promise<BookRating | null> {
   return (
     await axios.get(API_URL + "books/rating/" + bookId, {
       headers: getHeaders(),

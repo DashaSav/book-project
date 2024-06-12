@@ -7,7 +7,7 @@ import { useState } from "react";
 import StarRating from "./StarRating";
 import { addFavoriteBook, deleteFavoriteBook } from "../../data/apiService";
 
-type BookProps = { book: DBBook; rating?: number; isFavorite?: boolean };
+type BookProps = { book: DBBook; rating?: number | null; isFavorite?: boolean };
 
 export default function Book({ book, rating, isFavorite = false }: BookProps) {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ export default function Book({ book, rating, isFavorite = false }: BookProps) {
           </Stack>
 
           <Stack direction="vertical">
-            <StarRating value={rating} />
+            <StarRating value={rating ?? 0} />
             <Link to={prepareUrl(Routes.author, { id: book.userId })}>
               {book.user.name}
             </Link>

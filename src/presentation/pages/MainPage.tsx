@@ -11,7 +11,7 @@ import DefaultPageLayout from "./DefaultPage";
 function MainPage() {
   const [books, setBooks] = useState<DBBook[]>([]);
   const [favs, setFavs] = useState<Map<string, boolean>>(new Map());
-  const [ratings, setRatings] = useState<Map<string, number>>(new Map());
+  const [ratings, setRatings] = useState<Map<string, number | null>>(new Map());
 
   useEffect(() => {
     getBooks()
@@ -22,8 +22,8 @@ function MainPage() {
   useEffect(() => {
     const func = async () => {
       try {
-        await getRatings();
         await getFavs();
+        await getRatings();
       } catch (e) {
         console.log(e);
       }
@@ -47,11 +47,11 @@ function MainPage() {
   );
 
   async function getRatings() {
-    const newRatings = new Map<string, number>();
+    const newRatings = new Map<string, number | null>();
 
     for (const b of books) {
       const r = await getBookRating(b._id);
-      newRatings.set(b._id, r.rating);
+      newRatings.set(b._id, r?.rating ?? null);
     }
 
     setRatings(newRatings);
@@ -62,7 +62,7 @@ function MainPage() {
     const favs = await getFavoriteBooks();
 
     for (const b of books) {
-      const isFavorite = favs.findIndex((x) => x._id === b._id) != -1;
+      const isFavorite = favs.findIndex((x) => x._id === b._id) !== -1;
       newFavs.set(b._id, isFavorite);
     }
 

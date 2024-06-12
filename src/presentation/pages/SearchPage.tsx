@@ -16,7 +16,7 @@ export default function SearchPage() {
 
   const [books, setBooks] = useState<DBBook[]>([]);
   const [authors, setAuthors] = useState<DBUser[]>([]);
-  const [ratings, setRatings] = useState<Map<string, number>>(new Map());
+  const [ratings, setRatings] = useState<Map<string, number | null>>(new Map());
 
   useEffect(() => {
     if (text === undefined) return;
@@ -33,11 +33,11 @@ export default function SearchPage() {
   useEffect(() => {
     const func = async () => {
       try {
-        const newRatings = new Map<string, number>();
+        const newRatings = new Map<string, number | null>();
 
         for (const b of books) {
           const r = await getBookRating(b._id);
-          newRatings.set(b._id, r.rating);
+          newRatings.set(b._id, r?.rating ?? null);
         }
 
         setRatings(newRatings);
